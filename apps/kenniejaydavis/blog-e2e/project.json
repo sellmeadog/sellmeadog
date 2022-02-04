@@ -1,0 +1,28 @@
+{
+  "root": "apps/kenniejaydavis/blog-e2e",
+  "sourceRoot": "apps/kenniejaydavis/blog-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/kenniejaydavis/blog-e2e/cypress.json",
+        "devServerTarget": "kenniejaydavis-blog:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "kenniejaydavis-blog:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/kenniejaydavis/blog-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["kenniejaydavis-blog"]
+}

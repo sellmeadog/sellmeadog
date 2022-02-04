@@ -1,0 +1,46 @@
+{
+  "root": "apps/kenniejaydavis/blog",
+  "sourceRoot": "apps/kenniejaydavis/blog/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/gatsby:build",
+      "options": {
+        "outputPath": "apps/kenniejaydavis/blog/public",
+        "uglify": true,
+        "color": true,
+        "profile": false
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/gatsby:server",
+      "options": {
+        "buildTarget": "kenniejaydavis-blog:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "kenniejaydavis-blog:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/kenniejaydavis/blog/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/kenniejaydavis/blog"],
+      "options": {
+        "jestConfig": "apps/kenniejaydavis/blog/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

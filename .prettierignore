@@ -2,3 +2,7 @@
 
 /dist
 /coverage
+
+/apps/kenniejaydavis-blog/node_modules
+/apps/kenniejaydavis-blog/public
+/apps/kenniejaydavis-blog/.cache

@@ -29,5 +29,17 @@
       }
     ]
   },
-  "defaultProject": "commenting-mobile"
+  "defaultProject": "commenting-mobile",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/gatsby": {
+      "application": {
+        "style": "scss"
+      }
+    }
+  }
 }

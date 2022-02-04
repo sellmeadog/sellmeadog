@@ -1,0 +1,56 @@
+@use 'colors';
+
+.masthead {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  height: 4rem;
+  justify-content: center;
+
+  nav {
+    align-items: stretch;
+    display: flex;
+    flex: 1;
+    max-width: 64rem;
+
+    ul {
+      align-items: flex-end;
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        align-items: stretch;
+        align-self: stretch;
+        border-top: colors.$color-surface-00 3px solid;
+        display: flex;
+        justify-content: center;
+        margin: 0;
+
+        a {
+          align-items: center;
+          border-bottom: colors.$color-surface-00 3px solid;
+          border-top: colors.$color-surface-00 3px solid;
+          color: colors.$color-text-tertiary;
+          display: flex;
+          flex: 1;
+          padding: 0 1rem;
+          text-decoration: none;
+          text-transform: uppercase;
+
+          &:hover {
+            color: colors.$color-text-secondary;
+          }
+        }
+      }
+    }
+  }
+}
+
+.active {
+  border-top-color: red;
+  color: colors.$color-text-primary;
+}

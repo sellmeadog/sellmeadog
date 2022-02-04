@@ -96,3 +96,7 @@ buck-out/
 node_modules/
 
 apps/commenting-mobile-e2e/artifacts
+
+/apps/kenniejaydavis-blog/node_modules
+/apps/kenniejaydavis-blog/public
+/apps/kenniejaydavis-blog/.cache
