@@ -1,4 +1,5 @@
 @use 'colors';
+@use 'typography';
 
 .masthead {
   align-items: stretch;
@@ -37,6 +38,7 @@
           color: colors.$color-text-tertiary;
           display: flex;
           flex: 1;
+          font-family: typography.$sans-serif;
           padding: 0 1rem;
           text-decoration: none;
           text-transform: uppercase;

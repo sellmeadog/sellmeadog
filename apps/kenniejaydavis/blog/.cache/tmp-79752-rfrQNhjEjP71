@@ -1,5 +1,0 @@
-
-    const cmd = require("/Users/kenniedavis/Documents/git/sellmeadog/node_modules/gatsby/dist/commands/develop-process.js");
-    const args = {"_":["develop"],"port":55191,"p":"4200","host":"localhost","H":"localhost","https":false,"S":false,"verbose":false,"no-color":false,"no-colors":false,"noColors":false,"noColor":false,"json":false,"c":"","cert-file":"","certFile":"","k":"","key-file":"","keyFile":"","ca-file":"","caFile":"","graphql-tracing":false,"graphqlTracing":false,"$0":"gatsby","directory":"/Users/kenniedavis/Documents/git/sellmeadog/apps/kenniejaydavis/blog","browserslist":[">0.25%","not dead"],"sitePackageJson":{"name":"gatsby-starter-default","private":true,"description":"A simple starter to get up and develop quickly with Gatsby","version":"0.0.0","license":"MIT","dependencies":{"gatsby":"*","gatsby-plugin-image":"*"}},"report":{"errorMap":{}},"useYarn":false,"proxyPort":4200,"ssl":null,"debugInfo":null};
-    cmd(args);
-  

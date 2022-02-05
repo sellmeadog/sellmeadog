@@ -7265,19 +7265,21 @@ module.exports = Object.assign;
 
 /***/ }),
 
-/***/ "./src/components/blog-header.tsx":
-/*!****************************************!*\
-  !*** ./src/components/blog-header.tsx ***!
-  \****************************************/
+/***/ "./src/components/masthead.tsx":
+/*!*************************************!*\
+  !*** ./src/components/masthead.tsx ***!
+  \*************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
 exports.__esModule = true;
-exports["default"] = exports.BlogHeader = void 0;
+exports["default"] = exports.Masthead = void 0;
 
-var styles = _interopRequireWildcard(__webpack_require__(/*! ./blog-header.module.scss */ "./src/components/blog-header.module.scss"));
+var _gatsby = __webpack_require__(/*! gatsby */ "./.cache/gatsby-browser-entry.js");
+
+var styles = _interopRequireWildcard(__webpack_require__(/*! ./masthead.module.scss */ "./src/components/masthead.module.scss"));
 
 var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "../../../node_modules/react/jsx-runtime.js");
 
@@ -7285,17 +7287,92 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var BlogHeader = function BlogHeader(props) {
+var Masthead = function Masthead() {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("header", {
-    className: styles.header,
+    className: styles.masthead,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("nav", {
-      children: "Kennie Jay Davis"
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("ul", {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_gatsby.Link, {
+            activeClassName: "active",
+            to: "/",
+            partiallyActive: true,
+            children: "Home"
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_gatsby.Link, {
+            activeClassName: "active",
+            to: "/about",
+            partiallyActive: true,
+            children: "About"
+          })
+        })]
+      })
     })
   });
 };
 
-exports.BlogHeader = BlogHeader;
-var _default = BlogHeader;
+exports.Masthead = Masthead;
+var _default = Masthead;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "./src/components/post-reel.tsx":
+/*!**************************************!*\
+  !*** ./src/components/post-reel.tsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.PostReel = PostReel;
+exports["default"] = void 0;
+
+var styles = _interopRequireWildcard(__webpack_require__(/*! ./post-reel.module.scss */ "./src/components/post-reel.module.scss"));
+
+var _jsxRuntime = __webpack_require__(/*! react/jsx-runtime */ "../../../node_modules/react/jsx-runtime.js");
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function PostReel(props) {
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("ul", {
+    className: styles.postreel,
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("article", {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("header", {
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("h2", {
+            children: "Article Name"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("aside", {
+            children: "February 4, 2022"
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("section", {
+          children: "This is some content."
+        })]
+      })
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("article", {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("header", {
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("h2", {
+            children: "Article Name"
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("aside", {
+            children: "February 4, 2022"
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("section", {
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("p", {
+            children: "This is some content."
+          })
+        })]
+      })
+    })]
+  });
+}
+
+var _default = PostReel;
 exports["default"] = _default;
 
 /***/ }),
@@ -7317,7 +7394,9 @@ exports["default"] = void 0;
 
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 
-var _blogHeader = _interopRequireDefault(__webpack_require__(/*! ../components/blog-header */ "./src/components/blog-header.tsx"));
+var _masthead = _interopRequireDefault(__webpack_require__(/*! ../components/masthead */ "./src/components/masthead.tsx"));
+
+var _postReel = _interopRequireDefault(__webpack_require__(/*! ../components/post-reel */ "./src/components/post-reel.tsx"));
 
 __webpack_require__(/*! ./index.module.scss */ "./src/pages/index.module.scss");
 
@@ -7330,28 +7409,15 @@ function Index() {
    * Note: The corresponding styles are in the ./blog.scss file.
    */
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_blogHeader["default"], {}), /*#__PURE__*/(0, _jsxRuntime.jsx)("main", {
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
-          children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("article", {
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("header", {
-              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("h2", {
-                children: "Article Name"
-              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("aside", {
-                children: "February 4, 2022"
-              })]
-            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("section", {
-              children: "This is some content."
-            })]
-          })
-        })
-      })
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_masthead["default"], {}), /*#__PURE__*/(0, _jsxRuntime.jsx)("main", {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_postReel["default"], {})
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("footer", {})]
   });
 }
 
 var _default = Index;
 exports["default"] = _default;
+var pageQuery = "1452595675";
 
 /***/ }),
 
@@ -10288,13 +10354,38 @@ var shouldNavigate = function shouldNavigate(event) {
 
 /***/ }),
 
-/***/ "./src/components/blog-header.module.scss":
-/*!************************************************!*\
-  !*** ./src/components/blog-header.module.scss ***!
-  \************************************************/
-/***/ (() => {
+/***/ "./src/components/masthead.module.scss":
+/*!*********************************************!*\
+  !*** ./src/components/masthead.module.scss ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "masthead": () => (/* binding */ masthead),
+/* harmony export */   "active": () => (/* binding */ active)
+/* harmony export */ });
 // Exports
+var masthead = "masthead-module--masthead--fdsop";
+var active = "masthead-module--active--IGFlR";
+
+
+/***/ }),
+
+/***/ "./src/components/post-reel.module.scss":
+/*!**********************************************!*\
+  !*** ./src/components/post-reel.module.scss ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "postreel": () => (/* binding */ postreel)
+/* harmony export */ });
+// Exports
+var postreel = "post-reel-module--postreel--S5eVN";
 
 
 /***/ }),

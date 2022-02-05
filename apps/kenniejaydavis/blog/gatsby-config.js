@@ -56,5 +56,9 @@ module.exports = {
         icon: `src/images/logo.svg`,
       },
     },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {},
+    },
   ],
 };
