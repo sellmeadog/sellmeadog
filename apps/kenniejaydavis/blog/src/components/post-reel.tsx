@@ -18,23 +18,25 @@ export interface PostReelProps {
 
 export const PostReel: FC<PostReelProps> = ({ posts }) => {
   return (
-    <ul className={styles.postreel}>
-      {posts.map((post) => (
-        <li key={post.fields.slug}>
-          <article>
-            <header>
-              <h2>
-                <Link to={post.fields.slug}>{post.frontmatter.title}</Link>
-              </h2>
-              <p>{post.frontmatter.date}</p>
-            </header>
-            <section>
-              <p>{post.frontmatter.description}</p>
-            </section>
-          </article>
-        </li>
-      ))}
-    </ul>
+    <section id="posts" className={styles.content}>
+      <ul className={styles.reel}>
+        {posts.map((post) => (
+          <li key={post.fields.slug} className={styles.post}>
+            <article>
+              <header>
+                <h2>
+                  <Link to={post.fields.slug}>{post.frontmatter.title}</Link>
+                </h2>
+                <p>{post.frontmatter.date}</p>
+              </header>
+              <section>
+                <p>{post.frontmatter.description}</p>
+              </section>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 };
 

@@ -6,7 +6,7 @@ export interface HeroProps {}
 
 export const Hero: FC<HeroProps> = () => {
   return (
-    <section className={styles.hero}>
+    <section id="hero" className={styles.hero}>
       <div className={styles.content}>
         <div className={styles.columnLeft}>
           <h1 className={styles.entry}>Kennie J. Davis</h1>

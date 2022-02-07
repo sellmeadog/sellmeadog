@@ -1,7 +1,7 @@
 ---
 title: Wrong Answers Are Okay
 date: 2022-02-03T12:00:00
-description: Cunningham's Law states "the best way to get the right answer on the internet is not to ask a question; it's to post the wrong answer." Chances are I will be posting wrong answers on this blog in hopes that together we can arrive at correct ones.
+description: Cunningham's Law states "the best way to get the right answer on the internet is not to ask a question; it's to post the wrong answer." I started this blog knowing I will be posting wrong answers in hopes that together we can find the right answers.
 ---
 
 [Ward Cunningham](https://en.wikipedia.org/wiki/Ward_Cunningham), developer of the first [wiki](https://en.wikipedia.org/wiki/Wiki), observed that people are much more willing to correct a wrong answer than they are to answer a question. This observation led to his namesake law:
@@ -14,7 +14,7 @@ In fact, this is why I have delayed blogging for so long:
 
 ### What if I'm Wrong?
 
-I have started to blog many times before with the goal of sharing my experience and knowledge with the community only to quit each time fearing that I might publish erroneous information and be shunned forever when it is discovered that I am a fraud.
+I have started to blog many times before with the goal of sharing my experience and knowledge only to quit each time fearing that I might publish erroneous information and be shunned forever when it is discovered that I am a fraud.
 
 Every time I wrote an article, doubt set in I inevitably found myself contemplating one of the following questions:
 
