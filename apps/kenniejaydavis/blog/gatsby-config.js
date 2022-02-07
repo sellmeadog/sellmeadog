@@ -53,12 +53,32 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/logo.svg`,
+        icon: `src/images/kjd.svg`,
       },
     },
     {
       resolve: `gatsby-transformer-remark`,
       options: {},
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /\.inline\.svg$/,
+          omitKeys: [
+            'xmlns:inkscape',
+            'xmlns:rdf',
+            'xmlns:xlink',
+            'xmlns:nsl',
+            'xmlns:cc',
+            'xmlns:dc',
+            'xmlns:sodipodi',
+            'sodipodi:docname',
+            'inkscape:version',
+            'inkscape:*',
+          ],
+        },
+      },
     },
   ],
 };

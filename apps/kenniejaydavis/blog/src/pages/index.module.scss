@@ -3,21 +3,20 @@
 
 html,
 body {
-  color: colors.$color-text-primary;
   background-color: colors.$color-black;
+  color: colors.$color-text-primary;
+  display: block;
+  font-size: 1rem;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  display: block;
-  height: '100%';
-  font-size: 1rem;
 }
 
-main {
-  align-items: stretch;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
+// main {
+//   align-items: center;
+//   display: flex;
+//   flex-direction: column;
+// }
 
 h1,
 h2,
@@ -27,6 +26,8 @@ h5,
 h6 {
   color: colors.$color-white;
   font-family: typography.$sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 section,
@@ -34,8 +35,12 @@ p {
   color: colors.$color-text-primary;
   font-family: typography.$serif;
   font-size: 1.1rem;
-  font-weight: 400;
-  line-height: 1.7rem;
+  margin: 0;
+  padding: 0;
+}
+
+p + p {
+  margin-top: 2rem;
 }
 
 header {

@@ -7,20 +7,22 @@ export interface MastheadProps {}
 export const Masthead: FC<MastheadProps> = () => {
   return (
     <header className={styles.masthead}>
-      <nav>
-        <ul>
-          <li>
-            <Link activeClassName="active" to="/" partiallyActive>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link activeClassName="active" to="/about" partiallyActive>
-              About
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      <div className={styles.content}>
+        <nav>
+          <ul>
+            <li>
+              <Link activeClassName="active" to="/" partiallyActive>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link activeClassName="active" to="/about" partiallyActive>
+                About
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 };
