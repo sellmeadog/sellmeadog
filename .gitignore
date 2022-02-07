@@ -89,14 +89,8 @@ buck-out/
 
 ## CocoaPods
 **/ios/Pods/
-/
 
 ## Nested node_modules
 
-node_modules/
-
-apps/commenting-mobile-e2e/artifacts
-
-/apps/**/node_modules
-/apps/**/public
-/apps/**/.cache
+apps/kenniejaydavis/blog/public
+apps/kenniejaydavis/blog/.cache
