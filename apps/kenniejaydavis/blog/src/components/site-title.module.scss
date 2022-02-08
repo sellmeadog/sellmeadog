@@ -1,0 +1,25 @@
+@use 'colors';
+
+.title {
+  align-items: center;
+  border-right: colors.$color-surface-24 solid 1px;
+  box-sizing: content-box;
+  color: colors.$color-white;
+  display: flex;
+  font-family: 'Source Serif Pro', serif;
+  font-size: 1.5rem;
+  height: 3rem;
+  justify-content: center;
+  margin: 0.5rem 0 0.5rem 0;
+  padding: 0 2rem 0 0;
+
+  a {
+    color: colors.$color-white;
+    text-decoration: none;
+
+    &:hover {
+      color: colors.$color-cyan;
+      text-decoration: underline;
+    }
+  }
+}

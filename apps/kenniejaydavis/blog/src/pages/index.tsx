@@ -7,15 +7,10 @@ import './index.module.scss';
 
 type IndexPageProps = PageProps<QueryData>;
 
-export const Index: FC<IndexPageProps> = ({ data }) => {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./blog.scss file.
-   */
+export const Index: FC<IndexPageProps> = ({ data, location }) => {
   return (
     <div>
-      <Masthead />
+      <Masthead location={location} />
       <main>
         <Hero />
         <PostReel posts={data.allMarkdownRemark.nodes} />

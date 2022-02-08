@@ -8,6 +8,7 @@
 import '@fontsource/fira-sans';
 import '@fontsource/fira-sans/700.css';
 import '@fontsource/merriweather-sans/300.css';
+import '@fontsource/merriweather-sans/400.css';
 import '@fontsource/merriweather';
 import '@fontsource/merriweather/700.css';
 import '@fontsource/source-serif-pro';

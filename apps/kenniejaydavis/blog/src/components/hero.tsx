@@ -11,7 +11,8 @@ export const Hero: FC<HeroProps> = () => {
         <div className={styles.columnLeft}>
           <h1 className={styles.entry}>Kennie J. Davis</h1>
           <p className={styles.pronunciation}>
-            [ken &middot; nee &middot; jay &middot; day &middot; vis]
+            ken&middot;nie &middot; jay &middot; dav&middot;is &nbsp; | &nbsp;
+            kenē-jā-dāvis
           </p>
           <p className={styles.definition}>
             <span className={styles.classification}>noun</span> &ndash; a
@@ -25,13 +26,9 @@ export const Hero: FC<HeroProps> = () => {
           </p>
         </div>
         <div className={styles.columnRight}>
-          {/* <img
-            alt="Kennie Jay Davis"
-            src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Face-of-an-angry-man.svg"
-          /> */}
           <StaticImage
             alt="Kennie Jay Davis"
-            src="../images/memoji-skeptical.png"
+            src="../images/memoji-working.png"
             className={styles.avatar}
             placeholder="blurred"
           />

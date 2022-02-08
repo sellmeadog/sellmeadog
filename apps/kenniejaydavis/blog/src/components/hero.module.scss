@@ -20,19 +20,13 @@
       flex-direction: column;
 
       &Left {
-        flex: 1;
+        flex-grow: 1;
         padding-left: 4rem;
       }
 
       &Right {
-        flex-shrink: 1;
+        flex-shrink: 25%;
       }
-    }
-
-    .avatar {
-      transform: scaleX(-1);
-      width: 350px;
-      height: 350px;
     }
 
     .entry {
@@ -43,11 +37,13 @@
     .pronunciation {
       color: colors.$color-text-tertiary;
       font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 300;
     }
 
     .definition {
       color: colors.$color-text-secondary;
       font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 300;
 
       & + .definition {
         margin-top: 1em;

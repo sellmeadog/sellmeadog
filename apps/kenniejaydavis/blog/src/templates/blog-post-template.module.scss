@@ -1,0 +1,108 @@
+@use 'colors';
+
+.page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .hero {
+    background-color: colors.$color-surface-01;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    section {
+      align-self: center;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      max-width: 64rem;
+      padding: 4rem;
+      width: 100%;
+
+      p {
+        color: colors.$color-text-tertiary;
+        font-family: 'Merriweather Sans' sans-serif;
+        font-size: 1rem;
+        padding-top: 1rem;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    section {
+      align-self: center;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      max-width: 64rem;
+      padding: 4rem;
+      width: 100%;
+
+      * {
+        color: colors.$color-text-primary;
+        font-family: 'Merriweather' serif;
+        font-size: 1.2rem;
+        line-height: 1.7rem;
+      }
+
+      h2,
+      h3 {
+        color: colors.$color-orange;
+        font-weight: 400;
+        margin: 2rem 0 2rem 0;
+      }
+
+      a {
+        color: colors.$color-cyan;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      blockquote {
+        background-color: colors.$color-surface-01;
+        border-left: colors.$color-orange 3px solid;
+        box-sizing: border-box;
+        margin: 2rem 0 2rem 0;
+        padding: 1rem;
+
+        p {
+          color: colors.$color-text-secondary;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  section {
+    align-self: center;
+    box-sizing: border-box;
+    border-top: colors.$color-surface-24 1px solid;
+    display: flex;
+    flex-direction: column;
+    max-width: 64rem;
+    padding: 2rem 4rem 8rem 4rem;
+    width: 100%;
+
+    p {
+      color: colors.$color-text-tertiary;
+      font-family: 'Merriweather Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+  }
+}
