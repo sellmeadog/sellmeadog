@@ -10,11 +10,13 @@
   "private": true,
   "dependencies": {
     "@fontsource/fira-sans": "^4.5.1",
+    "@fontsource/material-icons": "^4.5.2",
     "@fontsource/merriweather": "^4.5.4",
     "@fontsource/merriweather-sans": "^4.5.2",
     "@fontsource/source-serif-pro": "^4.5.2",
     "core-js": "^3.6.5",
     "gatsby": "4.2.0",
+    "gatsby-plugin-feed": "^4.7.0",
     "gatsby-plugin-image": "2.2.0",
     "gatsby-plugin-manifest": "4.2.0",
     "gatsby-plugin-offline": "5.2.0",

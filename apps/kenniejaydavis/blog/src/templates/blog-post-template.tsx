@@ -1,4 +1,4 @@
-import { graphql, PageProps } from 'gatsby';
+import { graphql, Link, PageProps } from 'gatsby';
 import React, { FC, useState } from 'react';
 import Head from '../components/head';
 import Masthead from '../components/masthead';
@@ -36,7 +36,17 @@ export const BlogPostTemplate: FC<BlogPostTemplateProps> = ({ data }) => {
       </article>
       <footer className={styles.footer}>
         <section>
-          <p>Copyright &copy; {date.getFullYear()} Kennie J. Davis</p>
+          <div className={styles.left}>
+            <p>Copyright &copy; {date.getFullYear()} Kennie J. Davis</p>
+          </div>
+          <div className={styles.right}>
+            <Link to={'https://twitter.com/kenniejaydavis'} target={'_blank'}>
+              <span className="material-icons">twitter</span>
+            </Link>
+            <Link to={'/feeds/rss.xml'} target={'_blank'}>
+              <span className="material-icons">rss_feed</span>
+            </Link>
+          </div>
         </section>
       </footer>
     </>

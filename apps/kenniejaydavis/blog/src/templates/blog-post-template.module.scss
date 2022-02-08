@@ -90,10 +90,11 @@
 
   section {
     align-self: center;
-    box-sizing: border-box;
     border-top: colors.$color-surface-24 1px solid;
+    box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     max-width: 64rem;
     padding: 2rem 4rem 8rem 4rem;
     width: 100%;
@@ -103,6 +104,15 @@
       font-family: 'Merriweather Sans', sans-serif;
       font-size: 1rem;
       font-weight: 300;
+    }
+
+    a {
+      color: colors.$color-text-secondary;
+      text-decoration: none;
+
+      &:hover {
+        color: colors.$color-cyan;
+      }
     }
   }
 }
