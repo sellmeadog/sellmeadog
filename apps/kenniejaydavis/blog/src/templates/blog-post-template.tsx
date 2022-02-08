@@ -1,12 +1,13 @@
 import { graphql, PageProps } from 'gatsby';
 import React, { FC, useState } from 'react';
+import Head from '../components/head';
 import Masthead from '../components/masthead';
 import * as styles from './blog-post-template.module.scss';
 
 export interface BlogPostTemplateProps
   extends PageProps<{
     markdownRemark: {
-      frontmatter: { title: string; date: string };
+      frontmatter: { title: string; date: string; description: string };
       html: string;
     };
   }> {}
@@ -16,26 +17,11 @@ export const BlogPostTemplate: FC<BlogPostTemplateProps> = ({ data }) => {
   const [date] = useState(new Date());
 
   return (
-    // <div className={styles.page}>
-    //   <main className={styles.main}>
-    //     <article
-    //       className="article surface surface-01"
-    //       itemScope
-    //       itemType="http://schema.org/Article"
-    //     >
-    //       <header className={styles.hero}>
-    //         <h1 itemProp="headline">{post.frontmatter.title}</h1>
-    //         <p>{post.frontmatter.date}</p>
-    //       </header>
-    //       <section
-    //         id="body"
-    //         dangerouslySetInnerHTML={{ __html: post.html }}
-    //         itemProp="articleBody"
-    //       />
-    //     </article>
-    //   </main>
-    // </div>
     <>
+      <Head
+        title={post.frontmatter.title}
+        description={post.frontmatter.description}
+      />
       <Masthead />
       <article className={styles.page}>
         <header className={styles.hero}>

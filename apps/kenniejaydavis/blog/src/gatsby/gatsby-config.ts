@@ -4,8 +4,14 @@ import { resolve } from 'path';
 const config: GatsbyConfig = {
   siteMetadata: {
     title: 'kennie j. davis',
+    author: {
+      name: 'Kennie J. Davis',
+    },
     description: 'This is a gatsby application created by Nx.',
-    url: 'https://kenniejaydavis.com',
+    siteUrl: 'https://kenniejaydavis.com',
+    social: {
+      twitter: 'kenniejaydavis',
+    },
   },
   plugins: [
     {

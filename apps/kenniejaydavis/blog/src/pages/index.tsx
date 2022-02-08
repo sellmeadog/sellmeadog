@@ -1,5 +1,6 @@
 import { graphql, PageProps } from 'gatsby';
 import React, { FC } from 'react';
+import Head from '../components/head';
 import Hero from '../components/hero';
 import Masthead from '../components/masthead';
 import PostReel from '../components/post-reel';
@@ -9,14 +10,15 @@ type IndexPageProps = PageProps<QueryData>;
 
 export const Index: FC<IndexPageProps> = ({ data, location }) => {
   return (
-    <div>
+    <>
+      <Head title={'My Blog'} />
       <Masthead location={location} />
       <main>
         <Hero />
         <PostReel posts={data.allMarkdownRemark.nodes} />
       </main>
       <footer></footer>
-    </div>
+    </>
   );
 };
 
