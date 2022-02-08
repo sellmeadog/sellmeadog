@@ -7,7 +7,8 @@ const config: GatsbyConfig = {
     author: {
       name: 'Kennie J. Davis',
     },
-    description: 'This is a gatsby application created by Nx.',
+    description:
+      'Join me as I write about my experiences working in technology, explore new and seemingly random ideas, and rant about whatever might be on my mind.',
     siteUrl: 'https://kenniejaydavis.com',
     social: {
       twitter: 'kenniejaydavis',
