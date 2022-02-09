@@ -51,6 +51,8 @@ workflows:
                 - main
                 - /^(pull\/).*$/
       - deploy-netlify:
+          context:
+            - ci-tool-secrets
           requires:
             - checks
 
