@@ -38,12 +38,6 @@
         padding: 0;
 
         li {
-          // align-items: stretch;
-          // align-self: stretch;
-          // border-top: colors.$color-surface-00 3px solid;
-          // display: flex;
-          // justify-content: center;
-          // margin: 0;
           a {
             align-items: center;
             box-sizing: border-box;
@@ -68,29 +62,6 @@
           }
         }
       }
-
-      // a {
-      //   align-items: center;
-      //   border-bottom: colors.$color-surface-00 3px solid;
-      //   border-top: colors.$color-surface-00 3px solid;
-      //   color: colors.$color-text-tertiary;
-      //   display: flex;
-      //   flex: 1;
-      //   font-family: typography.$sans-serif;
-      //   padding: 0 1rem;
-      //   text-decoration: none;
-      //   text-transform: uppercase;
-      //   display: block;
-
-      //   &:hover {
-      //     color: colors.$color-text-secondary;
-      //   }
-
-      //   &.active {
-      //     border-top-color: red solid 3px;
-      //     color: colors.$color-text-primary;
-      //   }
-      // }
     }
   }
 }
