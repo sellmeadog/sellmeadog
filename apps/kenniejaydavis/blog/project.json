@@ -9,7 +9,8 @@
         "outputPath": "apps/kenniejaydavis/blog/public",
         "uglify": true,
         "color": true,
-        "profile": false
+        "profile": false,
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {}

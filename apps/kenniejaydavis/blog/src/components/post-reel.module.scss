@@ -12,10 +12,10 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    max-width: 56rem;
+    max-width: 64rem;
 
     .post {
-      padding: 3rem;
+      padding: var(--gutter);
       border-bottom: colors.$color-surface-24 1px solid;
 
       header {

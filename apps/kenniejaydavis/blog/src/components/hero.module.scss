@@ -18,13 +18,14 @@
     .column {
       display: flex;
       flex-direction: column;
+      box-sizing: border-box;
 
-      &Left {
+      &_left {
         flex-grow: 1;
-        padding-left: 4rem;
+        padding: var(--gutter) 0 var(--gutter) var(--gutter);
       }
 
-      &Right {
+      &_right {
         flex-shrink: 25%;
       }
     }
@@ -56,41 +57,5 @@
         font-weight: 700;
       }
     }
-
-    // div {
-    //   display: flex;
-    //   flex-direction: column;
-    //   justify-content: center;
-
-    //   h1 {
-    //     margin: 0;
-    //     padding: 0;
-    //   }
-
-    //   p {
-    //     &.pronunciation {
-    //       color: colors.$color-text-tertiary;
-    //       font-style: italic;
-    //     }
-
-    //     &.definition {
-    //       color: colors.$color-text-secondary;
-    //       margin: 0;
-
-    //       & + .definition {
-    //         margin-top: 0.5em;
-    //       }
-
-    //       strong {
-    //         color: colors.$color-text-primary;
-    //       }
-    //     }
-    //   }
-    // }
-
-    // img {
-    //   height: 200px;
-    //   width: 200px;
-    // }
   }
 }

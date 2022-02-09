@@ -8,7 +8,7 @@ export const Hero: FC<HeroProps> = () => {
   return (
     <section id="hero" className={styles.hero}>
       <div className={styles.content}>
-        <div className={styles.columnLeft}>
+        <div className={styles.column_left}>
           <h1 className={styles.entry}>Kennie J. Davis</h1>
           <p className={styles.pronunciation}>
             ken&middot;nie &middot; jay &middot; dav&middot;is &nbsp; | &nbsp;
@@ -25,7 +25,7 @@ export const Hero: FC<HeroProps> = () => {
             experience
           </p>
         </div>
-        <div className={styles.columnRight}>
+        <div className={styles.column_right}>
           <StaticImage
             alt="Kennie Jay Davis"
             src="../images/memoji-working.png"

@@ -5,6 +5,8 @@
  */
 
 // You can delete this file if you're not using it
+import './src/scss/styles.scss';
+
 import '@fontsource/fira-sans';
 import '@fontsource/fira-sans/700.css';
 import '@fontsource/material-icons';

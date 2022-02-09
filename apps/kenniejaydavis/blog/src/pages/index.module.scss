@@ -6,7 +6,7 @@ body {
   background-color: colors.$color-black;
   color: colors.$color-text-primary;
   display: block;
-  font-size: 1rem;
+  font-size: var(--font-size);
   height: 100vh;
   margin: 0;
   padding: 0;
@@ -38,9 +38,4 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-}
-
-.active {
-  border-top: colors.$color-cyan solid 3px;
-  color: yellow !important;
 }
