@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "deploy": {
+      "implementation": "./deploy.impl",
+      "schema": "./deploy.schema.json",
+      "description": "Create a new deploy from the contents of a folder."
+    }
+  }
+}

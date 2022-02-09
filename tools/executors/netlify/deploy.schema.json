@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "cli": "nx",
+  "properties": {
+    "dir": {
+      "description": "The specified folder to deploy",
+      "type": "string"
+    },
+    "prod": {
+      "description": "Deploy to production?",
+      "type": "boolean",
+      "default": false
+    },
+    "site": {
+      "description": "The site ID to deploy to; defaults to NETLIFY_SITE_ID",
+      "type": "string"
+    }
+  },
+  "required": ["dir"]
+}

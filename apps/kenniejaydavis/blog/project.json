@@ -41,6 +41,19 @@
         "jestConfig": "apps/kenniejaydavis/blog/jest.config.js",
         "passWithNoTests": true
       }
+    },
+
+    "deploy": {
+      "executor": "./tools/executors/netlify:deploy",
+      "options": {
+        "dir": "apps/kenniejaydavis/blog/public",
+        "site": "6f52645a-0d83-4e75-9d73-3e6c5d589797"
+      },
+      "configurations": {
+        "production": {
+          "prod": true
+        }
+      }
     }
   },
   "tags": []
