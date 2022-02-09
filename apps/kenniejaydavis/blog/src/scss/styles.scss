@@ -1,16 +1,15 @@
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
-$breakpoint-xl: 1200px;
 
 :root {
-  --font-size: 10px;
+  --font-size: 12px;
   --gutter: 1rem;
 }
 
 @media (min-width: $breakpoint-md) {
   :root {
-    --font-size: 12px;
+    --font-size: 14px;
     --gutter: 2rem;
   }
 }
