@@ -8,7 +8,6 @@ executors:
   node-lts-browsers:
     docker:
       - image: cimg/node:16.14-browsers
-    resource_class: small
 
 jobs:
   checks:
