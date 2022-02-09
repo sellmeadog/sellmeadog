@@ -1,8 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "commenting-mobile": "apps/commenting-mobile",
-    "commenting-mobile-e2e": "apps/commenting-mobile-e2e",
     "kenniejaydavis-blog": "apps/kenniejaydavis/blog",
     "kenniejaydavis-blog-e2e": "apps/kenniejaydavis/blog-e2e"
   }

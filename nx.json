@@ -30,7 +30,6 @@
       }
     ]
   },
-  "defaultProject": "commenting-mobile",
   "generators": {
     "@nrwl/react": {
       "application": {
