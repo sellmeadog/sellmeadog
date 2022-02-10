@@ -69,7 +69,24 @@ const config: GatsbyConfig = {
     },
     {
       resolve: 'gatsby-transformer-remark',
-      options: {},
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+            },
+          },
+          {
+            resolve: `gatsby-remark-vscode`,
+            options: {
+              inlineCode: {
+                marker: '~',
+              },
+            },
+          },
+        ],
+      },
     },
     {
       resolve: `gatsby-plugin-feed`,
