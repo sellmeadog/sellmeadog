@@ -7,6 +7,10 @@ $breakpoint-lg: 992px;
   --gutter: 1rem;
 }
 
+.grvsc-source {
+  width: 100%;
+}
+
 @media (min-width: $breakpoint-md) {
   :root {
     --font-size: 14px;
