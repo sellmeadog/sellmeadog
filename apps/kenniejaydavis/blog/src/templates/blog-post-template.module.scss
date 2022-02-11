@@ -44,7 +44,9 @@
       padding: var(--gutter);
       width: 100%;
 
-      * {
+      p,
+      ol,
+      ul {
         color: colors.$color-text-primary;
         font-family: 'Merriweather' serif;
         font-size: 1.2rem;
