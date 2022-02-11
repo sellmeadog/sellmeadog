@@ -7,6 +7,12 @@ $breakpoint-lg: 992px;
   --gutter: 1rem;
 }
 
+code:not(.grvsc-code) {
+  color: rgba(172, 142, 104, 1);
+  font-size: inherit;
+  line-height: inherit;
+}
+
 .grvsc-source {
   width: 100%;
 }

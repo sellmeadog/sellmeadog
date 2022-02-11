@@ -51,13 +51,26 @@
         font-family: 'Merriweather' serif;
         font-size: 1.2rem;
         line-height: 1.7rem;
+
+        & + pre {
+          margin-top: 2rem;
+        }
+      }
+
+      h2,
+      h3,
+      h4 {
+        color: colors.$color-orange;
+        font-family: 'Merriweather Sans', sans-serif;
       }
 
       h2,
       h3 {
-        color: colors.$color-orange;
-        font-family: 'Merriweather Sans', sans-serif;
         margin: 2rem 0 2rem 0;
+      }
+
+      h4 {
+        margin: 2rem 0 0.5rem 0;
       }
 
       a {
@@ -79,6 +92,16 @@
         p {
           color: colors.$color-text-secondary;
           font-style: italic;
+        }
+      }
+
+      pre {
+        margin: 0;
+
+        & + p,
+        & + ol,
+        & + ul {
+          margin-top: 2rem;
         }
       }
     }

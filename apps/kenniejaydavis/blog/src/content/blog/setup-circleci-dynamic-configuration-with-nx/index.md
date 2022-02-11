@@ -4,6 +4,84 @@ date: 2022-02-10T12:00:00
 description: Nx is a smart, fast and extensible build system with first class monorepo support making it trivial to determine what projects in the workspace need to be rebuilt and deployed. CircleCI is a powerful CI/CD tool and Dynamic Configuration is particularly useful for monorepos. This series of articles will explore techniques to use Nx to generate dynamic configuration for CircleCI.
 ---
 
+I recently had the opportunity to introduce my team to [Nx][nx] and made the proposal to consolidate our polyrepo architecture into a monorepo. The idea was met with _"optimistic skepticism"_ and I set forth setting up an experimental workspace to prove and demonstrate the concepts. Additionally, I needed to understand and ensure any roadblocks unique to our internal enterprise environment could be cleared before officially making the transition.
+
+My archenemy: **_CircleCI_**.
+
+Having no prior experience with CircleCI, I attempted to port an Azure DevOps pipeline I knew worked to CircleCI...
+
+Fail.
+
+Turns out I had a lot to learn about CircleCI before I could even get to the heart of the final working solution: [dynamic configuration][circle_dc].
+
+Since I am unable to share our internal solution, I instead want to walk through how I build and deploy [my blog](https://kenniejaydavis.com) from an [Nx workspace][sellmeadog] to Netlify using [CircleCI and dynamic configuration][circle_dc]. I will do my best to cover everything in detail and all the code and configuration that I go over is [available here][sellmeadog] for reference.
+
+## Getting Started
+
+### Enable Dynamic Configuration
+
+#### Workspace
+
+Every CircleCI project requires a `.circleci/config.yml` file at the root of the repository, or in Nx terminology, the root of the workspace.
+
+```{diff}
++ .circleci/
++    config.yml
+apps/
+libs/
+...
+nx.json
+...
+workspace.json
+```
+
+Changes to `.circleci/configy.yml` should affect every project. This can be configured in `nx.json` using `implicitDependencies` as shown below.
+
+```json{diff}
+"implicitDependencies": {
++  ".circleci/*.yml": "*",
+  "package.json": {
+    "dependencies": "*",
+    "devDependencies": "*"
+  },
+  ".eslintrc.json": "*"
+},
+```
+
+#### CircleCI
+
+Dynamic configuration is disabled in every CircleCI project by default. In CircleCI, from the `Projects` dashboard:
+
+- Open the `Project Settings` for your Nx workspace
+- Click on the `Advanced` tab
+- Find and enable `Enable dynamic config using setup workflows` at the bottom the page
+
+![Enable dynamic config using setup workflows](./dynamic-config-enable.png)
+
+## What is Dynamic Configuration?
+
+If you are familiar with CircleCI then you know that by default you define an entire pipeline in a single `.circleci/config.yml` file at the root of your repository. Your only means to control job and/or workflow execution are with parameters and `when` conditions.
+
+Dynamic configuration changes this paradigm by splitting pipeline execution into two phases, **_setup_** and **_continuation_**, with each having a corresponding configuration file, typically `config.yml` and `continue.config.yml` respectively.
+
+#### Setup
+
+Dynamic configuration starts with the execution of a `setup workflow` which must be defined in `.circleci/config.yml` at the root of the repository with the `setup` keyword set to true followed by a `continue` job from the [continuation orb](https://circleci.com/developer/orbs/orb/circleci/continuation).
+
+```yml{diff}
+version: 2.1
+
++ setup: true
+
++ orbs:
++  continuation: circleci/continuation@0.1.2
+
+jobs:
+  checks:
+    - checkout
+```
+
+<!--
 I recently had the opportunity to introduce a development team to [Nx][nx] and the benefits of working in a monorepo. The first question I was asked after my introductory presentation: "How do we build and deploy from the Nx workspace using CircleCI?"
 
 Having no prior experience with CircleCI, I attempted to port an Azure DevOps pipeline I knew worked to a `.circleci/config.yml` file...
@@ -51,6 +129,7 @@ orbs:
   node: circleci/node@5.0.0
   nx: nrwl/nx@1.1.3
 ```
+ -->
 
 [circle_cli]: https://circleci.com/docs/2.0/local-cli/
 [circle_dc]: https://circleci.com/docs/2.0/dynamic-config/

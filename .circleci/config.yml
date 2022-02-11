@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  continuation: circleci/continuation@0.2.0
   node: circleci/node@5.0.0
   nx: nrwl/nx@1.1.3
 
