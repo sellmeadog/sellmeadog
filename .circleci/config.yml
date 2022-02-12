@@ -26,9 +26,16 @@ commands:
       - run:
           name: Run continuation-parameters generator
           command: npx nx workspace-generator continuation-parameters --base=$NX_BASE --head=$NX_HEAD
-      - continuation/continue:
-          configuration_path: .circleci/continue.config.yml
-          parameters: tmp/continuation-parameters.json
+      - when:
+          condition: $CIRCLE_PULL_REQUEST
+          steps:
+            - continuation/finish
+      - unless:
+          condition: $CIRCLE_PULL_REQUESTS
+          steps:
+            - continuation/continue:
+                configuration_path: .circleci/continue.config.yml
+                parameters: tmp/continuation-parameters.json
 
 jobs:
   check-branch:
@@ -72,12 +79,6 @@ workflows:
             branches:
               ignore:
                 - main
-                - /^(pulls\/).*$/
-
-      - check-pr:
-          filters:
-            branches:
-              only:
                 - /^(pulls\/).*$/
 
       - check-main:
