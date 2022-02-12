@@ -59,20 +59,20 @@ workflows:
           requires:
             - checks
 
-  check-pr:
-    jobs:
-      - checks:
-          context:
-            - ci-tool-secrets
-          filters:
-            branches:
-              only: /^(pull\/).*$/
+  # check-pr:
+  #   jobs:
+  #     - checks:
+  #         context:
+  #           - ci-tool-secrets
+  #         filters:
+  #           branches:
+  #             only: /^(pull\/).*$/
 
-  build-and-deploy:
-    jobs:
-      - checks:
-          context:
-            - ci-tool-secrets
-          filters:
-            branches:
-              only: main
+  # build-and-deploy:
+  #   jobs:
+  #     - checks:
+  #         context:
+  #           - ci-tool-secrets
+  #         filters:
+  #           branches:
+  #             only: main
