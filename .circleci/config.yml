@@ -7,72 +7,153 @@ orbs:
   node: circleci/node@5.0.0
   nx: nrwl/nx@1.1.3
 
-executors:
-  node-lts-browsers:
-    docker:
-      - image: cimg/node:16.14-browsers
+commands:
+  nx-checks:
+    steps:
+      - nx/set-shas
+      - run:
+          name: Run nx affected:build
+          command: npx nx affected --target=build --base=$NX_BASE --parallel
+      - run:
+          name: Run nx affected:lint
+          command: npx nx affected --target=lint --base=$NX_BASE --parallel
+      - run:
+          name: Run nx affected:test
+          command: npx nx affected --target=test --base=$NX_BASE --parallel
+      - continuation/finish
 
 jobs:
-  checks:
-    executor: node-lts-browsers
+  check-branch:
+    executor:
+      name: node/default
+      tag: 16.14-browsers
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
-      - nx/set-shas
-      - run:
-          name: Run affected:build
-          command: yarn nx affected --target=build --base=$NX_BASE --parallel
-      - run:
-          name: Run affected:lint
-          command: yarn nx affected --target=build --base=$NX_BASE --parallel
-      - run:
-          name: Run affected:test
-          command: yarn nx affected --target=test --base=$NX_BASE --parallel
-      - persist_to_workspace:
-          root: '.'
-          paths: '.'
+      - nx-checks
 
-  deploy-netlify:
-    executor: node-lts-browsers
+  check-pr:
+    executor:
+      name: node/default
+      tag: 16.14-browsers
     steps:
-      - attach_workspace:
-          at: '.'
-      - run:
-          name: Run affected:deploy
-          command: yarn nx affected --target=deploy --base=$NX_BASE --parallel
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - nx-checks
+
+  check-main:
+    executor:
+      name: node/default
+      tag: 16.14-browsers
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - nx-checks
 
 workflows:
-  check-branch:
+  check:
     jobs:
-      - checks:
-          context:
-            - ci-tool-secrets
+      - check-branch:
           filters:
             branches:
               ignore:
                 - main
                 - /^(pull\/).*$/
-      - deploy-netlify:
-          context:
-            - ci-tool-secrets
-          requires:
-            - checks
 
-  # check-pr:
-  #   jobs:
-  #     - checks:
-  #         context:
-  #           - ci-tool-secrets
-  #         filters:
-  #           branches:
-  #             only: /^(pull\/).*$/
+      - check-pr:
+          filters:
+            branches:
+              only:
+                - /^(pull\/).*$/
 
-  # build-and-deploy:
-  #   jobs:
-  #     - checks:
-  #         context:
-  #           - ci-tool-secrets
-  #         filters:
-  #           branches:
-  #             only: main
+      - check-main:
+          filters:
+            branches:
+              only:
+                - main
+# version: 2.1
+
+# setup: true
+
+# orbs:
+#   continuation: circleci/continuation@0.2.0
+#   node: circleci/node@5.0.0
+#   nx: nrwl/nx@1.1.3
+
+# executors:
+#   node-lts-browsers:
+#     docker:
+#       - image: cimg/node:16.14-browsers
+
+# commands:
+#   nx-checks:
+#     steps:
+#       - run:
+#           name: Run affected:build
+#           command: yarn nx affected --target=build --base=$NX_BASE --parallel
+#       - run:
+#           name: Run affected:lint
+#           command: yarn nx affected --target=build --base=$NX_BASE --parallel
+#       - run:
+#           name: Run affected:test
+#           command: yarn nx affected --target=test --base=$NX_BASE --parallel
+
+# jobs:
+#   checks:
+#     executor: node-lts-browsers
+#     steps:
+#       - checkout
+#       - node/install-packages:
+#           pkg-manager: yarn
+#       - nx/set-shas
+#       - nx-checks
+#       - persist_to_workspace:
+#           root: '.'
+#           paths: '.'
+
+#   deploy-netlify:
+#     executor: node-lts-browsers
+#     steps:
+#       - attach_workspace:
+#           at: '.'
+#       - run:
+#           name: Run affected:deploy
+#           command: yarn nx affected --target=deploy --base=$NX_BASE --parallel
+
+# workflows:
+#   check-branch:
+#     jobs:
+#       - checks:
+#           context:
+#             - ci-tool-secrets
+#           filters:
+#             branches:
+#               ignore:
+#                 - main
+#                 - /^(pull\/).*$/
+#       - deploy-netlify:
+#           context:
+#             - ci-tool-secrets
+#           requires:
+#             - checks
+
+#   # check-pr:
+#   #   jobs:
+#   #     - checks:
+#   #         context:
+#   #           - ci-tool-secrets
+#   #         filters:
+#   #           branches:
+#   #             only: /^(pull\/).*$/
+
+#   # build-and-deploy:
+#   #   jobs:
+#   #     - checks:
+#   #         context:
+#   #           - ci-tool-secrets
+#   #         filters:
+#   #           branches:
+#   #             only: main
