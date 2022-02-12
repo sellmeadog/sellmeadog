@@ -46,6 +46,7 @@
     "@nrwl/cli": "13.7.3",
     "@nrwl/cypress": "13.4.6",
     "@nrwl/detox": "13.7.3",
+    "@nrwl/devkit": "13.7.3",
     "@nrwl/eslint-plugin-nx": "13.7.3",
     "@nrwl/gatsby": "^13.4.6",
     "@nrwl/jest": "13.7.3",
