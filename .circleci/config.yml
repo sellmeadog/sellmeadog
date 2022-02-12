@@ -1,6 +1,6 @@
 version: 2.1
 
-setup: << parameters.setup >>
+setup: true
 
 orbs:
   continuation: circleci/continuation@0.2.0
