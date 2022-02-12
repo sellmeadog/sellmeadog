@@ -1,0 +1,42 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.0
+  nx: nrwl/nx@1.1.3
+
+commands:
+  nx-checks:
+    steps:
+      - nx/set-shas
+      - run:
+          name: Run nx affected:build
+          command: npx nx affected --target=build --base=$NX_BASE --head=$NX_HEAD --parallel
+      - run:
+          name: Run nx affected:lint
+          command: npx nx affected --target=lint --base=$NX_BASE --head=$NX_HEAD --parallel
+      - run:
+          name: Run nx affected:test
+          command: npx nx affected --target=test --base=$NX_BASE --head=$NX_HEAD --parallel
+
+jobs:
+  deploy-pr:
+    executor: node-lts-browsers
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - nx/set-shas
+      - nx-checks
+      - run:
+          name: Run affected:deploy
+          command: yarn nx affected --target=deploy --base=$NX_BASE --parallel
+
+workflows:
+  kenniejaydavis-blog:
+    when: << parameters.kenniejaydavis-blog >>
+  jobs:
+    - deploy-pr:
+        filters:
+          branches:
+            only:
+              - /^(pull\/).*$/
