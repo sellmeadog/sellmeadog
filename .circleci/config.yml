@@ -29,27 +29,16 @@ commands:
       - when:
           condition: $CIRCLE_PULL_REQUEST
           steps:
-            - continuation/finish
-      - unless:
-          condition: $CIRCLE_PULL_REQUESTS
-          steps:
             - continuation/continue:
                 configuration_path: .circleci/continue.config.yml
                 parameters: tmp/continuation-parameters.json
+      - unless:
+          condition: $CIRCLE_PULL_REQUEST
+          steps:
+            - continuation/finish
 
 jobs:
   check-branch:
-    executor:
-      name: node/default
-      tag: 16.14-browsers
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - nx-checks
-      - continuation/finish
-
-  check-pr:
     executor:
       name: node/default
       tag: 16.14-browsers
