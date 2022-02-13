@@ -32,17 +32,18 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: yarn
-      - nx/set-shas
       - nx-checks
       - run:
           name: Run affected:deploy
-          command: yarn nx affected --target=deploy --base=$NX_BASE --parallel
+          command: yarn nx affected --target=deploy --base=$NX_BASE --head=$NX_HEAD --parallel
 
 workflows:
   kenniejaydavis-blog:
     when: << pipeline.parameters.kenniejaydavis-blog >>
     jobs:
       - deploy-pr:
+          context:
+            - ci-tool-secrets
           filters:
             branches:
               ignore:

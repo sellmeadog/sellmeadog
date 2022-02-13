@@ -64,13 +64,16 @@ workflows:
   check:
     jobs:
       - check-branch:
+          context:
+            - ci-tool-secrets
           filters:
             branches:
               ignore:
                 - main
-                - /^(pulls\/).*$/
 
       - check-main:
+          context:
+            - ci-tool-secrets
           filters:
             branches:
               only:
