@@ -4,6 +4,11 @@ orbs:
   node: circleci/node@5.0.0
   nx: nrwl/nx@1.1.3
 
+parameters:
+  kenniejaydavis-blog:
+    type: boolean
+    default: false
+
 commands:
   nx-checks:
     steps:
@@ -20,7 +25,9 @@ commands:
 
 jobs:
   deploy-pr:
-    executor: node-lts-browsers
+    executor:
+      name: node/default
+      tag: 16.14-browsers
     steps:
       - checkout
       - node/install-packages:
@@ -33,10 +40,10 @@ jobs:
 
 workflows:
   kenniejaydavis-blog:
-    when: << parameters.kenniejaydavis-blog >>
-  jobs:
-    - deploy-pr:
-        filters:
-          branches:
-            only:
-              - /^(pull\/).*$/
+    when: << pipeline.parameters.kenniejaydavis-blog >>
+    jobs:
+      - deploy-pr:
+          filters:
+            branches:
+              ignore:
+                - main
