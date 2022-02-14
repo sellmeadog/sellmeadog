@@ -1,30 +1,28 @@
-@use 'colors';
-
 .page {
   display: flex;
   flex-direction: column;
   flex: 1;
 
   .hero {
-    background-color: colors.$color-surface-01;
+    background-color: var(--surface-01);
     display: flex;
-    flex-direction: column;
     flex: 1;
+    justify-content: center;
 
     section {
-      align-self: center;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
       max-width: 64rem;
-      padding: var(--gutter);
+      padding: 4rem;
       width: 100%;
 
+      h1 {
+        color: var(--color-white);
+        margin-bottom: 0.2em;
+      }
+
       p {
-        color: colors.$color-text-tertiary;
-        font-family: 'Merriweather Sans' sans-serif;
-        font-size: 1rem;
-        padding-top: 1rem;
+        color: var(--text-tertiary);
+        font-family: var(--font-family-sans);
+        font-weight: 300;
         text-transform: uppercase;
       }
     }
@@ -32,112 +30,14 @@
 
   .body {
     display: flex;
-    flex-direction: column;
     flex: 1;
+    justify-content: center;
 
     section {
-      align-self: center;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      max-width: 64rem;
-      padding: var(--gutter);
+      border-bottom: 1px solid var(--surface-01);
+      max-width: 56rem;
+      padding: 4rem;
       width: 100%;
-
-      p,
-      ol,
-      ul {
-        color: colors.$color-text-primary;
-        font-family: 'Merriweather' serif;
-        font-size: 1.2rem;
-        line-height: 1.7rem;
-
-        & + pre {
-          margin-top: 2rem;
-        }
-      }
-
-      h2,
-      h3,
-      h4 {
-        color: colors.$color-orange;
-        font-family: 'Merriweather Sans', sans-serif;
-      }
-
-      h2,
-      h3 {
-        margin: 2rem 0 2rem 0;
-      }
-
-      h4 {
-        margin: 2rem 0 0.5rem 0;
-      }
-
-      a {
-        color: colors.$color-cyan;
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      blockquote {
-        background-color: colors.$color-surface-01;
-        border-left: colors.$color-orange 3px solid;
-        box-sizing: border-box;
-        margin: 2rem 0 2rem 0;
-        padding: 1rem;
-
-        p {
-          color: colors.$color-text-secondary;
-          font-style: italic;
-        }
-      }
-
-      pre {
-        margin: 0;
-
-        & + p,
-        & + ol,
-        & + ul {
-          margin-top: 2rem;
-        }
-      }
-    }
-  }
-}
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-
-  section {
-    align-self: center;
-    border-top: colors.$color-surface-24 1px solid;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 64rem;
-    padding: 2rem var(--gutter) 8rem var(--gutter);
-    width: 100%;
-
-    p {
-      color: colors.$color-text-tertiary;
-      font-family: 'Merriweather Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 300;
-    }
-
-    a {
-      color: colors.$color-text-secondary;
-      text-decoration: none;
-
-      &:hover {
-        color: colors.$color-cyan;
-      }
     }
   }
 }

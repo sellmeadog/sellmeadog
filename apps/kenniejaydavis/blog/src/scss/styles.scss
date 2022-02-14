@@ -1,32 +1,38 @@
-$breakpoint-sm: 576px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 992px;
+@use 'reset';
+@use 'colors';
+@use 'typography';
 
-:root {
-  --font-size: 12px;
-  --gutter: 1rem;
+html,
+body {
+  background-color: var(--surface-00);
 }
+
+/* Vendor Overrides */
 
 code:not(.grvsc-code) {
-  color: rgba(172, 142, 104, 1);
-  font-size: inherit;
-  line-height: inherit;
+  color: var(--color-brown);
 }
 
-.grvsc-source {
-  width: 100%;
-}
-
-@media (min-width: $breakpoint-md) {
-  :root {
-    --font-size: 14px;
-    --gutter: 2rem;
+code {
+  .grvsc-source {
+    width: 100%;
   }
 }
 
-@media (min-width: $breakpoint-lg) {
-  :root {
-    --font-size: 16px;
-    --gutter: 4rem;
-  }
+pre.default-dark {
+  background-color: var(--surface-01);
 }
+
+// @media (min-width: $breakpoint-md) {
+//   :root {
+//     --font-size: 14px;
+//     --gutter: 2rem;
+//   }
+// }
+
+// @media (min-width: $breakpoint-lg) {
+//   :root {
+//     --font-size: 16px;
+//     --gutter: 4rem;
+//   }
+// }

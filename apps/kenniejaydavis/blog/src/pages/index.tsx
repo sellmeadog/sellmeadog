@@ -13,8 +13,8 @@ export const Index: FC<IndexPageProps> = ({ data, location }) => {
     <>
       <Head title={'My Blog'} />
       <Masthead location={location} />
+      <Hero />
       <main>
-        <Hero />
         <PostReel posts={data.allMarkdownRemark.nodes} />
       </main>
       <footer></footer>

@@ -1,10 +1,8 @@
-@use 'colors';
-
 .title {
   align-items: center;
-  border-right: colors.$color-surface-24 solid 1px;
+  border-right: var(--surface-01) solid 1px;
   box-sizing: content-box;
-  color: colors.$color-white;
+  color: var(--color-white);
   display: flex;
   font-family: 'Source Serif Pro', serif;
   font-size: 1.5rem;
@@ -14,11 +12,11 @@
   padding: 0 2rem 0 0;
 
   a {
-    color: colors.$color-white;
+    color: var(--color-white);
     text-decoration: none;
 
     &:hover {
-      color: colors.$color-cyan;
+      color: var(--color-cyan);
       text-decoration: underline;
     }
   }

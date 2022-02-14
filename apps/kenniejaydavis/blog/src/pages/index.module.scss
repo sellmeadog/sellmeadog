@@ -1,41 +1,5 @@
-@use 'colors';
-@use 'typography';
-
-html,
-body {
-  background-color: colors.$color-black;
-  color: colors.$color-text-primary;
-  display: block;
-  font-size: var(--font-size);
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
-section,
-p {
-  color: colors.$color-text-primary;
-  font-family: typography.$serif;
-  font-size: 1.1rem;
-  margin: 0;
-  padding: 0;
-}
-
-p + p {
-  margin-top: 2rem;
-}
-
-header {
-  p {
-    color: colors.$color-text-tertiary;
-    font-family: typography.$sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-}
-
 main {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
+  justify-content: center;
 }

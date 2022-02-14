@@ -1,38 +1,117 @@
-$font-scale: 1.25;
+:root {
+  --font-size: 1rem;
+  --font-ratio: 1.25;
+  --font-family-sans: 'Merriweather Sans', sans-serif;
+  --font-family-serif: 'Merriweather', serif;
+}
 
-$font-size-4: calc(1rem * $font-scale);
-$font-size-3: calc($font-size-4 * $font-scale);
-$font-size-2: calc($font-size-3 * $font-scale);
-$font-size-1: calc($font-size-2 * $font-scale);
+html {
+  font-size: var(--font-size);
+}
 
-$sans-serif: 'Merriweather Sans', sans-serif;
-$serif: 'Merriweather', serif;
+body {
+  color: var(--text-primary);
+  line-height: 1.5;
+}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Merriweather Sans', sans-serif;
-  font-weight: 300;
+/* Headings */
+
+$heading-levels: 4, 3, 2, 1;
+$heading-ratio: var(--font-ratio);
+$heading-size: 1rem;
+
+@each $heading-level in $heading-levels {
+  $heading-size: calc($heading-size * $heading-ratio);
+
+  h#{$heading-level} {
+    color: var(--color-orange);
+    font-family: var(--font-family-sans);
+    font-size: $heading-size;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 0.65em;
+  }
+}
+
+/* Body */
+
+blockquote,
+li,
+p {
+  font-family: var(--font-family-serif);
+  font-size: 1rem;
+}
+
+blockquote {
+  background-color: var(--surface-01);
+  border-left: 0.25em solid var(--color-orange);
+  color: var(--text-secondary);
+  font-size: calc(var(--font-size) * var(--font-ratio));
+  font-style: italic;
+  padding: 0.85em;
+}
+
+em {
+  color: inherit;
+  font-style: italic;
+}
+
+strong {
+  color: inherit;
+  font-weight: 600;
+}
+
+/* Lists */
+
+ol,
+ul {
+  list-style: revert;
   margin: 0;
-  padding: 0;
+  padding: revert;
+
+  li {
+    margin: revert;
+    padding: revert;
+  }
 }
 
-h4 {
-  font-size: $font-size-4;
-  font-weight: 400;
+/* Monospace */
+
+code,
+pre {
+  font-family: monospace;
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-h3 {
-  font-size: $font-size-3;
+/* Spacing */
+
+@each $el in blockquote, ol, p, pre, ul {
+  #{$el} + blockquote,
+  #{$el} + h1,
+  #{$el} + h2,
+  #{$el} + h3,
+  #{$el} + h4,
+  #{$el} + ol,
+  #{$el} + p,
+  #{$el} + pre,
+  #{$el} + ul {
+    margin-top: 1.5rem;
+  }
 }
 
-h2 {
-  font-size: $font-size-2;
-}
+/* Navigation */
 
-h1 {
-  font-size: $font-size-1;
+a {
+  color: var(--color-cyan);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: var(--color-cyan);
+  }
 }

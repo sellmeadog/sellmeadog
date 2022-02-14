@@ -1,5 +1,3 @@
-@use 'colors';
-
 .content {
   align-self: center;
   display: flex;
@@ -15,8 +13,8 @@
     max-width: 64rem;
 
     .post {
-      padding: var(--gutter);
-      border-bottom: colors.$color-surface-24 1px solid;
+      padding: 4rem;
+      border-bottom: 1px solid var(--surface-01);
 
       header {
         margin-bottom: 1rem;
@@ -25,7 +23,7 @@
           margin-bottom: 0.5rem;
 
           a {
-            color: colors.$color-cyan;
+            color: var(--color-cyan);
             font-family: 'Merriweather Sans', sans-serif;
             font-size: 2.1rem;
             text-decoration: none;
@@ -33,7 +31,7 @@
         }
 
         p {
-          color: colors.$color-text-tertiary;
+          color: var(--text-tertiary);
           font-family: 'Merriweather Sans', sans-serif;
           font-size: 0.9rem;
           font-variant: small-caps;
@@ -43,7 +41,7 @@
 
       section {
         p {
-          color: colors.$color-text-secondary;
+          color: var(--text-secondary);
           margin: 0;
           padding: 0;
         }

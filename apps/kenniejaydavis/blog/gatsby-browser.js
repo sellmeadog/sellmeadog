@@ -12,6 +12,8 @@ import '@fontsource/fira-sans/700.css';
 import '@fontsource/material-icons';
 import '@fontsource/merriweather-sans/300.css';
 import '@fontsource/merriweather-sans/400.css';
+import '@fontsource/merriweather-sans/500.css';
+import '@fontsource/merriweather-sans/600.css';
 import '@fontsource/merriweather/300.css';
 import '@fontsource/merriweather/700.css';
 import '@fontsource/source-serif-pro';
