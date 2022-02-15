@@ -1,12 +1,13 @@
 :root {
-  --font-size: 1rem;
+  --font-size-min: 16px;
+  --font-size-max: 20px;
   --font-ratio: 1.25;
   --font-family-sans: 'Merriweather Sans', sans-serif;
   --font-family-serif: 'Merriweather', serif;
 }
 
 html {
-  font-size: var(--font-size);
+  font-size: clamp(var(--font-size-min), 2vw, var(--font-size-max));
 }
 
 body {
@@ -46,7 +47,7 @@ blockquote {
   background-color: var(--surface-01);
   border-left: 0.25em solid var(--color-orange);
   color: var(--text-secondary);
-  font-size: calc(var(--font-size) * var(--font-ratio));
+  font-size: calc(var(--font-size-min) * var(--font-ratio));
   font-style: italic;
   padding: 0.85em;
 }
