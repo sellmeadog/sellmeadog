@@ -11,7 +11,7 @@ type IndexPageProps = PageProps<QueryData>;
 export const Index: FC<IndexPageProps> = ({ data, location }) => {
   return (
     <>
-      <Head title={'My Blog'} />
+      <Head title={'Kennie Jay Davis | My Blog'} />
       <Masthead location={location} />
       <Hero />
       <main>
