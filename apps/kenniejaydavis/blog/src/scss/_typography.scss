@@ -52,6 +52,12 @@ blockquote {
   padding: 0.85em;
 }
 
+del {
+  color: var(--text-tertiary);
+  font-style: italic;
+  text-decoration: line-through;
+}
+
 em {
   color: inherit;
   font-style: italic;
