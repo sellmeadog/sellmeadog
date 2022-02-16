@@ -10,9 +10,15 @@ parameters:
     default: false
 
 commands:
-  nx-checks:
+  ci--setup:
     steps:
+      - checkout
       - nx/set-shas
+      - node/install-packages:
+          pkg-manager: yarn
+
+  nx--run-checks:
+    steps:
       - run:
           name: Run nx affected:build
           command: npx nx affected --target=build --base=$NX_BASE --head=$NX_HEAD --parallel
@@ -24,26 +30,31 @@ commands:
           command: npx nx affected --target=test --base=$NX_BASE --head=$NX_HEAD --parallel
 
 jobs:
-  deploy-pr:
+  netlify--deploy:
     executor:
       name: node/default
       tag: 16.14-browsers
+    parameters:
+      project:
+        type: string
+      configuration:
+        type: string
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - nx-checks
+      - ci--setup
+      - nx--run-checks
       - run:
-          name: Run affected:deploy
-          command: yarn nx affected --target=deploy --base=$NX_BASE --head=$NX_HEAD --parallel
+          name: Execute nx run << parameters.project >>:deploy --configuration=<< parameters.configuration >>
+          command: npx nx run << parameters.project >>:deploy --configuration=<< parameters.configuration >> --base=$NX_BASE --head=$NX_HEAD
 
 workflows:
   kenniejaydavis-blog:
     when: << pipeline.parameters.kenniejaydavis-blog >>
     jobs:
-      - deploy-pr:
+      - netlify--deploy:
           context:
             - ci-tool-secrets
+          configuration: development
+          project: kenniejaydavis-blog
           filters:
             branches:
               ignore:
