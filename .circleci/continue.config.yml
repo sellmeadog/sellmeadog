@@ -43,8 +43,8 @@ jobs:
       - ci--setup
       - nx--run-checks
       - run:
-          name: Execute nx run << parameters.project >>:deploy --configuration=<< parameters.configuration >>
-          command: npx nx run << parameters.project >>:deploy --configuration=<< parameters.configuration >> --base=$NX_BASE --head=$NX_HEAD
+          name: Execute nx run << parameters.project >>:deploy:<< parameters.configuration >>
+          command: npx nx run << parameters.project >>:deploy:<< parameters.configuration >>
 
 workflows:
   kenniejaydavis-blog:
