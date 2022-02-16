@@ -9,39 +9,86 @@ parameters:
     type: boolean
     default: false
 
+executor--node: &executor--node
+  executor:
+    name: node/default
+    tag: 16.14-browsers
+
+parameters--nx-run: &parameters--nx-run
+  project:
+    type: string
+  configuration:
+    type: string
+
 commands:
+  ci--attach-workspace:
+    steps:
+      - attach_workspace:
+          at: '.'
+
+  nx--run-checks:
+    parameters:
+      <<: *parameters--nx-run
+    steps:
+      - run:
+          name: Execute nx run << parameters.project >>:build:<< parameters.configuration >>
+          command: npx nx run << parameters.project >>:build:<< parameters.configuration >>
+      - run:
+          name: Execute nx run << parameters.project >>:lint
+          command: npx nx run << parameters.project >>:lint
+      - run:
+          name: Execute nx run << parameters.project >>:test
+          command: npx nx run << parameters.project >>:test
+
+jobs:
   ci--setup:
+    <<: *executor--node
     steps:
       - checkout
       - nx/set-shas
       - node/install-packages:
           pkg-manager: yarn
+      - persist_to_workspace:
+          root: '.'
+          paths: '.'
 
-  nx--run-checks:
-    steps:
-      - run:
-          name: Run nx affected:build
-          command: npx nx affected --target=build --base=$NX_BASE --head=$NX_HEAD --parallel
-      - run:
-          name: Run nx affected:lint
-          command: npx nx affected --target=lint --base=$NX_BASE --head=$NX_HEAD --parallel
-      - run:
-          name: Run nx affected:test
-          command: npx nx affected --target=test --base=$NX_BASE --head=$NX_HEAD --parallel
-
-jobs:
-  netlify--deploy:
-    executor:
-      name: node/default
-      tag: 16.14-browsers
+  nx--build:
+    <<: *executor--node
     parameters:
-      project:
-        type: string
-      configuration:
-        type: string
+      <<: *parameters--nx-run
+
     steps:
-      - ci--setup
-      - nx--run-checks
+      - ci--attach-workspace
+      - run:
+          name: Execute nx run << parameters.project >>:build:<< parameters.configuration >>
+          command: npx nx run << parameters.project >>:build:<< parameters.configuration >>
+
+  nx--lint:
+    <<: *executor--node
+    parameters:
+      <<: *parameters--nx-run
+    steps:
+      - ci--attach-workspace
+      - run:
+          name: Execute nx run << parameters.project >>:lint
+          command: npx nx run << parameters.project >>:lint
+
+  nx--test:
+    <<: *executor--node
+    parameters:
+      <<: *parameters--nx-run
+    steps:
+      - ci--attach-workspace
+      - run:
+          name: Execute nx run << parameters.project >>:test
+          command: npx nx run << parameters.project >>:test
+
+  nx--netlify-deploy:
+    <<: *executor--node
+    parameters:
+      <<: *parameters--nx-run
+    steps:
+      - ci--attach-workspace
       - run:
           name: Execute nx run << parameters.project >>:deploy:<< parameters.configuration >>
           command: npx nx run << parameters.project >>:deploy:<< parameters.configuration >>
@@ -50,11 +97,39 @@ workflows:
   kenniejaydavis-blog:
     when: << pipeline.parameters.kenniejaydavis-blog >>
     jobs:
-      - netlify--deploy:
+      - ci--setup:
+          name: setup
           context:
             - ci-tool-secrets
-          configuration: development
+      - nx--build:
+          name: build
+          requires:
+            - setup
           project: kenniejaydavis-blog
+          configuration: development
+      - nx--lint:
+          name: lint
+          requires:
+            - setup
+          project: kenniejaydavis-blog
+          configuration: development
+      - nx--test:
+          name: test
+          requires:
+            - setup
+          project: kenniejaydavis-blog
+          configuration: development
+      - nx--netlify-deploy:
+          name: deploy pr
+          context:
+            - ci-tool-secrets
+          requires:
+            - setup
+            - build
+            - lint
+            - test
+          project: kenniejaydavis-blog
+          configuration: development
           filters:
             branches:
               ignore:
