@@ -41,11 +41,16 @@ jobs:
     <<: *executor--node
     parameters:
       <<: *parameters--nx-run
+      output_path:
+        type: string
     steps:
       - ci--attach-workspace
       - run:
           name: Execute nx run << parameters.project >>:build:<< parameters.configuration >>
           command: npx nx run << parameters.project >>:build:<< parameters.configuration >>
+      - persist_to_workspace:
+          root: '.'
+          paths: << parameters.output_path >>
 
   nx--lint:
     <<: *executor--node
@@ -90,6 +95,7 @@ workflows:
           requires:
             - setup
           project: kenniejaydavis-blog
+          output_path: apps/kenniejaydavis/blog/public
       - nx--lint:
           name: lint
           requires:
