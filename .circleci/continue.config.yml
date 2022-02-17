@@ -37,21 +37,6 @@ jobs:
           root: '.'
           paths: '.'
 
-  nx--build:
-    <<: *executor--node
-    parameters:
-      <<: *parameters--nx-run
-      output_path:
-        type: string
-    steps:
-      - ci--attach-workspace
-      - run:
-          name: Execute nx run << parameters.project >>:build:<< parameters.configuration >>
-          command: npx nx run << parameters.project >>:build:<< parameters.configuration >>
-      - persist_to_workspace:
-          root: '.'
-          paths: << parameters.output_path >>
-
   nx--lint:
     <<: *executor--node
     parameters:
@@ -79,6 +64,9 @@ jobs:
     steps:
       - ci--attach-workspace
       - run:
+          name: Execute nx run << parameters.project >>:build:<< parameters.configuration >>
+          command: npx nx run << parameters.project >>:build:<< parameters.configuration >>
+      - run:
           name: Execute nx run << parameters.project >>:deploy:<< parameters.configuration >>
           command: npx nx run << parameters.project >>:deploy:<< parameters.configuration >>
 
@@ -90,12 +78,6 @@ workflows:
           name: setup
           context:
             - ci-tool-secrets
-      - nx--build:
-          name: build
-          requires:
-            - setup
-          project: kenniejaydavis-blog
-          output_path: apps/kenniejaydavis/blog/public
       - nx--lint:
           name: lint
           requires:
@@ -111,7 +93,6 @@ workflows:
           context:
             - ci-tool-secrets
           requires:
-            - build
             - lint
             - test
           project: kenniejaydavis-blog
