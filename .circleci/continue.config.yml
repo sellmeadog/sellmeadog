@@ -100,3 +100,16 @@ workflows:
             branches:
               ignore:
                 - main
+      - nx--netlify-deploy:
+          name: deploy main
+          context:
+            - ci-tool-secrets
+          requires:
+            - lint
+            - test
+          project: kenniejaydavis-blog
+          configuration: production
+          filters:
+            branches:
+              only:
+                - main
