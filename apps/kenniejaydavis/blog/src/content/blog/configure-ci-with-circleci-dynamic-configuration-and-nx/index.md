@@ -4,150 +4,128 @@ date: 2022-02-10T12:00:00
 description: Nx is a smart, fast and extensible build system with first class monorepo support making it trivial to determine what projects in the workspace need to be rebuilt and deployed. CircleCI is a powerful CI/CD tool and Dynamic Configuration is particularly useful for monorepos. This series of articles will explore techniques to use Nx to generate dynamic configuration for CircleCI.
 ---
 
-[Nx](https://nx.dev) is great for monorepos. The tooling is smart, fast, and easy.
+If you've done any searching for help configuring CircleCI in a monorepo, you've no doubt come across the `circleci/path-filtering` orb. In fact, I think every example I have found relies on path filtering. And if you've searched for help configuring CircleCI specifically in an Nx workspace, you've probably already seen the example in the Nx documentation.
 
-Too easy.
+In regards to configuring a complete CircleCI pipeline in an Nx workspace, the Nx documentation is arguably incomplete. It even states _"every organization manages their CI/CD pipelines differently, so the examples don't cover org-specific aspects of CI/CD (e.g., deployment). They mainly focus on configuring Nx correctly."_
 
-In fact, it is so easy to start a workspace and effortlessly begin scaffolding code libraries and compose them into fully tested applications that you might quickly find yourself in a "now what?" situation when it comes time to build and deploy through a proper CI/CD pipeline.
+As for path filtering, you'll find no shortage of complete CI/CD pipeline examples, however, they're not a good fit for Nx. I won't go into detail as to why path filtering is problematic in an Nx workspace, I'll save that for a follow up article. Instead, I want to walk through how I derived an Nx specific solution from the `circleci/path-filtering` orb source in combination with the "correct CircleCI configuration" provided by Nrwl.
 
-This is when the naysayers will strike.
+### What is Path Filtering?
 
-If you work on a development team, regardless the size, there will be at least one team member not bought into the monorepo concept. They lurk in the shadows waiting to pounce at the first sign of trouble with "Plan B" fully locked and loaded. As such, planning ahead to avoid as many "now what?" situations as possible. The more work you do up front, like configuring CI/CD, the more likely your team will ship their first feature from the workspace without issue.
-
-### The Devil is in the Details
-
-I have been in these "now what?" situation before; most recently when I underestimated the nuances of configuring CircleCI in an Nx workspace. After all, the Nx documentation already contains [Configuring CI Using CircleCI and Nx](https://nx.dev/ci/monorepo-ci-circle-ci) and the Nx Cloud documentation contains a [CircleCI section](https://nx.app/docs/configuring-ci#circle-ci).
-
-### Configure the Nx Workspace
-
-Every CircleCI project requires a `.circleci/config.yml` file at the root of the repository.
-
-```{diff}
-// nx workspace
-
-+ .circleci/
-+    config.yml
-apps/
-libs/
-...
-nx.json
-...
-workspace.json
-```
-
-Now add this initial pipeline inspired by the Nx documentation.
+Let's start with an example directly from the path filtering orb documentation:
 
 ```yml
-# .circleci/config.yml
-
-version: 2.1
-
 orbs:
-  node: circleci/node@5.0.0
+  path-filtering: circleci/path-filtering@0.1.1
+
+jobs:
+  - path-filtering/filter:
+      base-revision: main
+      config-path: .circleci/continue-config.yml
+      mapping: |
+        src/.* build-code true
+        doc/.* build-docs true
+```
+
+The `path-filtering/filter` job analyzes each push to the repository to determine where changes occurred between the current commit and the `base-revision`. These file system locations are then dynamically mapped to workflows defined in a separate configuration file located at `config-path`.
+
+Thus at runtime, changes to files in the `src/` directory will trigger a workflow named `build-code` while changes to files within the `docs/` directory will trigger `build-docs`. Both workflows are defined in `.circleci/continue-config.yml`.
+
+### How it Works
+
+Let's again start with a code snippet directly from the orb source documentation (edited for brevity):
+
+```yml
+orbs:
+  continuation: circleci/continuation@0.2.0
+
+jobs:
+  filter:
+    ...
+    steps:
+      ...
+      - set-parameters:
+          base-revision: << parameters.base-revision >>
+          mapping: << parameters.mapping >>
+      - continuation/continue:
+          circleci_domain: << parameters.circleci_domain >>
+          configuration_path: << parameters.config-path >>
+          parameters: /tmp/pipeline-parameters.json
+```
+
+The `filter` job is composed of two main steps: `set-parameters` and `continuation/continue`.
+
+The `set-parameters` step is where all of the hard work is done analyzing changes with the responsibility of generating a `/tmp/pipeline-parameters.json` file. This file defines a simple JSON object resembling the `mapping` configuration:
+
+```
+{ build-code: true, build-docs: false }
+```
+
+The `circleci/continuation` orb defines the `continue` step which handles triggering the workflows defined in `.circleci/continue-config.yml` that are conditionally run based on the generated parameters in `/tmp/pipeline-parameters.json`.
+
+### Deriving a Solution for Nx
+
+After understanding how the `circleci/path-filtering` orb works, I made two key observations:
+
+1. Nx already excels at determining what is affected by each commit
+2. The `circleci/continuation` orb can be used directly in any setup workflow
+
+Using the path filtering orb as a reference, I came up with this set of steps to run in the setup workflow:
+
+```yml {numberLines}
+orbs:
   nx: nrwl/nx@1.1.3
 
 commands:
-  nx--run-checks:
+  nx-continue:
     steps:
-      - run:
-          name: Run nx affected:build
-          command: npx nx affected --base=$NX_BASE --head=$NX_HEAD --target=build --parallel=3
-      - run:
-          name: Run nx affected:lint
-          command: npx nx affected --base=$NX_BASE --head=$NX_HEAD --target=lint --parallel=3
-      - run:
-          name: Run nx affected:test
-          command: npx nx affected --base=$NX_BASE --head=$NX_HEAD --target=test --parallel=3
-
-jobs:
-  main:
-    executor:
-      name: node/default
-      tag: 16.14-browsers
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
       - nx/set-shas
-      - nx--run-checks
-  pr:
-    executor:
-      name: node/default
-      tag: 16.14-browsers
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - nx/set-shas
-      - nx--run-checks
-
-workflows:
-  build:
-    jobs:
-      - main:
-          filters:
-            branches:
-              only: main
-      - pr:
-          filters:
-            branches:
-              ignore: main
+      - run:
+          name: Run continuation-parameters generator
+          command: npx nx workspace-generator continuation-parameters --base=$NX_BASE --head=$NX_HEAD
+      - when:
+          condition: $CIRCLE_PULL_REQUEST
+          steps:
+            - continuation/continue:
+                configuration_path: .circleci/continue.config.yml
+                parameters: tmp/continuation-parameters.json
+      - unless:
+          condition: $CIRCLE_PULL_REQUEST
+          steps:
+            - continuation/finish
 ```
 
-If this pipeline seems overly simplistic, it is. At this point we only want to validate that the `nrwl/nx` orb is configured properly and that the Nx `affected` commands execute as expected. Application specific configurations will come later.
+Let's dissect the `nx-continue` steps:
 
-Finally, any changes to `.circleci/configy.yml` should affect every project. This can be configured in `nx.json` using `implicitDependencies` as shown below.
+```yml {numberLines}
+orbs:
+  nx: nrwl/nx@1.1.3
 
-```json{diff}
-// nx.json
-
-"implicitDependencies": {
-+  ".circleci/*.yml": "*",
-  "package.json": {
-    "dependencies": "*",
-    "devDependencies": "*"
-  },
-  ".eslintrc.json": "*"
-},
+commands:
+  nx-continue:
+    steps:
+      - nx/set-shas
 ```
 
-This ensures that as changes are made to the pipeline, the Nx `affected` commands will execute against their targets as expected.
+This block adds the official Nx orb to the pipeline. On line 7, we run the `nx/set-shas` step which calculates the base and head commits to be used in the Nx `affected` commands. These values are stored in environment variables, `NX_BASE` and `NX_HEAD` respectively.
 
-### Setup the CircleCI Project
+```yml {numberLines:8}
+- run:
+    name: Run continuation-parameters generator
+    command: npx nx workspace-generator continuation-parameters --base=$NX_BASE --head=$NX_HEAD
+```
 
-This section assumes that you have already [created a CircleCI account](https://circleci.com/docs/2.0/first-steps/) and connected your GitHub account. Once you are logged in and your source code connect, the `Projects` dashboard
+This runs a custom workspace generator which mimics the `set-parameters` step in the path filtering orb. The generator runs `nx affected:apps --plain --base=$NX_BASE --head=$NX_HEAD` mapping the output to a `/tmp/continuation-parameters.json` file.
 
-#### Enable Dynamic Configuration
-
-#### Organization Settings
-
-There are two Organization Settings required for the initial pipeline to run:
-
-**Orb Security Settings**
-
-1. Navigate to `Organization Settings`
-2. Click the `Security` tab in the left menu
-3. In the `Orb Security Settings` check `Yes` to `Allow Uncertified Orbs` ![Orb Security Settings](./circleci-orb-security-settings.png)
-
-**Create a Context**
-
-A CircleCI context defines environment variables that can be referenced by jobs in a pipeline. The `nrwl/nx` orb requires a `CIRCLE_API_TOKEN` that contains a user token. Once you have [created the token](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token), continue with the steps below.
-
-1. Navigate to `Organization Settings` in CircleCI
-2. Click the `Contexts` tab on the left
-3. Click the `Create Context` button
-4. In the dialog, enter the name `ci-tool-secrets` and click `Create Context`
-
-The new context is now listed in the `Contexts` list as shown below.
-
-![CircleCI Contexts](./circleci-contexts.png)
-
-5. Click the new `ci-tool-secrets` item in the contexts list
-6. Click `Add Environment Variable`
-7. In the dialog, enter `CIRCLE_API_TOKEN` for the **Environment Variable Name** and paste your user token into the **Value** text box; click `Add Environment Variable`
-
-### Define the Continuation Pipeline
-
-### Generate the Continuation Pipeline Parameters
-
-### Enable the Setup Workflow
+```yml {numberLines:11}
+- when:
+    condition: $CIRCLE_PULL_REQUEST
+    steps:
+      - continuation/continue:
+          configuration_path: .circleci/continue.config.yml
+          parameters: tmp/continuation-parameters.json
+- unless:
+    condition: $CIRCLE_PULL_REQUEST
+    steps:
+      - continuation/finish
+```
