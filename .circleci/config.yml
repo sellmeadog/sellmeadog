@@ -67,6 +67,8 @@ jobs:
       name: node/default
       tag: 16.14-browsers
     steps:
+      - attach_workspace:
+          at: '.'
       - nx--checks
       - nx--continue:
           pr: $CIRCLE_PULL_REQUEST
@@ -76,6 +78,8 @@ jobs:
       name: node/default
       tag: 16.14-browsers
     steps:
+      - attach_workspace:
+          at: '.'
       - nx--checks
       - nx--continue:
           pr: $CIRCLE_PULL_REQUEST
