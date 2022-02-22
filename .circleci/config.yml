@@ -36,11 +36,16 @@ commands:
         default: ''
     steps:
       - run:
-          name: Run continuation-parameters generator
-          command: npx nx workspace-generator continuation-parameters --base=$NX_BASE --head=$NX_HEAD
+          name: 'Is Pull Request'
+          command: |
+            echo ${CIRCLE_PULL_REQUEST}
+            echo "<< parameters.pr >>"
       - when:
           condition: << parameters.pr >>
           steps:
+            - run:
+                name: Run continuation-parameters generator
+                command: npx nx workspace-generator continuation-parameters --base=$NX_BASE --head=$NX_HEAD
             - continuation/continue:
                 configuration_path: .circleci/continue.config.yml
                 parameters: tmp/continuation-parameters.json
