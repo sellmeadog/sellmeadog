@@ -1,24 +1,49 @@
 version: 2.1
 
-setup: true
-
 orbs:
-  continuation: circleci/continuation@0.2.0
   node: circleci/node@5.0.0
   nx: nrwl/nx@1.1.3
 
 commands:
+  ci--setup:
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - nx/set-shas
+
   nx--affected:
     parameters:
       target:
         type: string
+      configuration:
+        type: string
+        default: ''
       parallel:
         type: integer
         default: 3
     steps:
-      - run:
-          name: Run nx affected:<< parameters.target >>
-          command: npx nx affected --target=<< parameters.target >> --base=$NX_BASE --head=$NX_HEAD --parallel=3
+      - when:
+          condition: << parameters.configuration>>
+          steps:
+            - run:
+                name: Run nx affected:<< parameters.target >>
+                command: |
+                  npx nx affected --base=$NX_BASE \
+                                  --configuration=<< parameters.configuration >> \
+                                  --head=$NX_HEAD \
+                                  --parallel=<< parameters.parallel >> \
+                                  --target=<< parameters.target >>
+      - unless:
+          condition: << parameters.configuration>>
+          steps:
+            - run:
+                name: Run nx affected:<< parameters.target >>
+                command: |
+                  npx nx affected --base=$NX_BASE \
+                                  --head=$NX_HEAD \
+                                  --parallel=<< parameters.parallel >> \
+                                  --target=<< parameters.target >>
 
   nx--checks:
     steps:
@@ -29,88 +54,30 @@ commands:
       - nx--affected:
           target: test
 
-  nx--continue:
-    parameters:
-      pr:
-        type: string
-        default: ''
-    steps:
-      - run:
-          name: 'Is Pull Request'
-          command: |
-            echo ${CIRCLE_PULL_REQUEST}
-            echo "<< parameters.pr >>"
-      - when:
-          condition: << parameters.pr >>
-          steps:
-            - run:
-                name: Run continuation-parameters generator
-                command: npx nx workspace-generator continuation-parameters --base=$NX_BASE --head=$NX_HEAD
-            - continuation/continue:
-                configuration_path: .circleci/continue.config.yml
-                parameters: tmp/continuation-parameters.json
-      - unless:
-          condition: << parameters.pr >>
-          steps:
-            - continuation/finish
-
 jobs:
-  ci--setup:
+  main:
     executor:
       name: node/default
-      tag: 16.14-browsers
+      tag: 16-browsers
     steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - persist_to_workspace:
-          root: '.'
-          paths: '.'
-
-  check-branch:
-    executor:
-      name: node/default
-      tag: 16.14-browsers
-    steps:
-      - attach_workspace:
-          at: '.'
+      - ci--setup
       - nx--checks
-      - nx--continue:
-          pr: $CIRCLE_PULL_REQUEST
-
-  check-main:
+  pr:
     executor:
       name: node/default
-      tag: 16.14-browsers
+      tag: 16-browsers
     steps:
-      - attach_workspace:
-          at: '.'
+      - ci--setup
       - nx--checks
-      - nx--continue:
-          pr: $CIRCLE_PULL_REQUEST
 
 workflows:
-  setup_workflow:
+  build:
     jobs:
-      - ci--setup:
-          name: setup
-
-      - check-branch:
-          context:
-            - ci-tool-secrets
-          requires:
-            - setup
+      - main:
           filters:
             branches:
-              ignore:
-                - main
-
-      - check-main:
-          context:
-            - ci-tool-secrets
-          requires:
-            - setup
+              only: main
+      - pr:
           filters:
             branches:
-              only:
-                - main
+              ignore: main
