@@ -58,14 +58,14 @@ jobs:
   main:
     executor:
       name: node/default
-      tag: 16-browsers
+      tag: lts-browsers
     steps:
       - ci--setup
       - nx--checks
   pr:
     executor:
       name: node/default
-      tag: 16-browsers
+      tag: lts-browsers
     steps:
       - ci--setup
       - nx--checks
