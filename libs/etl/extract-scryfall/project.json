@@ -1,20 +1,20 @@
 {
-  "root": "libs/etl/extract-scryfall-sets",
-  "sourceRoot": "libs/etl/extract-scryfall-sets/src",
+  "root": "libs/etl/extract-scryfall",
+  "sourceRoot": "libs/etl/extract-scryfall/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/etl/extract-scryfall-sets/**/*.ts"]
+        "lintFilePatterns": ["libs/etl/extract-scryfall/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/etl/extract-scryfall-sets"],
+      "outputs": ["coverage/libs/etl/extract-scryfall"],
       "options": {
-        "jestConfig": "libs/etl/extract-scryfall-sets/jest.config.js",
+        "jestConfig": "libs/etl/extract-scryfall/jest.config.js",
         "passWithNoTests": true
       }
     }
