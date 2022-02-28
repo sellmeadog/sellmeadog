@@ -1,0 +1,23 @@
+{
+  "root": "libs/etl/magic-types",
+  "sourceRoot": "libs/etl/magic-types/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/etl/magic-types/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/etl/magic-types"],
+      "options": {
+        "jestConfig": "libs/etl/magic-types/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

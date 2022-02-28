@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@sellmeadog/etl/magic-types": ["libs/etl/magic-types/src/index.ts"],
+      "@sellmeadog/etl/scryfall-types": ["libs/etl/scryfall-types/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,0 +1,23 @@
+{
+  "root": "libs/etl/scryfall-types",
+  "sourceRoot": "libs/etl/scryfall-types/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/etl/scryfall-types/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/etl/scryfall-types"],
+      "options": {
+        "jestConfig": "libs/etl/scryfall-types/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
