@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@sellmeadog/etl/extract-scryfall-sets": [
+        "libs/etl/extract-scryfall-sets/src/index.ts"
+      ],
       "@sellmeadog/etl/magic-types": ["libs/etl/magic-types/src/index.ts"],
       "@sellmeadog/etl/scryfall-types": ["libs/etl/scryfall-types/src/index.ts"]
     }
