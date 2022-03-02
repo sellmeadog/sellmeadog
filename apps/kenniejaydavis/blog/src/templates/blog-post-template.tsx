@@ -4,13 +4,19 @@ import Head from '../components/head';
 import Masthead from '../components/masthead';
 import * as styles from './blog-post-template.module.scss';
 
-export interface BlogPostTemplateProps
-  extends PageProps<{
-    markdownRemark: {
-      frontmatter: { title: string; date: string; description: string };
-      html: string;
+export interface DataProp {
+  markdownRemark: {
+    frontmatter: {
+      title: string;
+      date: string;
+      description: string;
     };
-  }> {}
+    html: string;
+  };
+}
+
+export interface BlogPostTemplateProps
+  extends Pick<PageProps<DataProp>, 'data'> {}
 
 export const BlogPostTemplate: FC<BlogPostTemplateProps> = ({ data }) => {
   const post = data.markdownRemark;

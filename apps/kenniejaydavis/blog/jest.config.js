@@ -7,4 +7,7 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/apps/kenniejaydavis/blog',
+  globals: {
+    __PATH_PREFIX__: 'blog',
+  },
 };
