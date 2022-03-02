@@ -1,8 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "commenting-mobile": "apps/commenting-mobile",
-    "commenting-mobile-e2e": "apps/commenting-mobile-e2e",
     "etl-extract-scryfall": "libs/etl/extract-scryfall",
     "etl-magic-types": "libs/etl/magic-types",
     "etl-scryfall-types": "libs/etl/scryfall-types",
