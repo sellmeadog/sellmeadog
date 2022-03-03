@@ -1,13 +1,9 @@
+import { makeMockedFunction } from '@sellmeadog/extensions/testing';
 import fetch, { Response } from 'node-fetch';
 import { extract_scryfall_sets } from './extract-scryfall-sets';
 
-jest.mock('node-fetch', () => ({
-  ...(jest.requireActual('node-fetch') as any),
-  default: jest.fn(),
-}));
-
 describe('extract_scryfall_sets', () => {
-  const fetch_ = fetch as jest.MockedFunction<typeof fetch>;
+  const fetch_ = makeMockedFunction(fetch);
 
   it('should fetch request', () => {
     fetch_.mockImplementation(() =>

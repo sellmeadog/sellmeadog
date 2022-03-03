@@ -1,10 +1,13 @@
 {
   "version": 2,
   "projects": {
+    "data-source-scryfall": "libs/data-source/scryfall",
     "etl-extract-scryfall": "libs/etl/extract-scryfall",
     "etl-magic-types": "libs/etl/magic-types",
     "etl-scryfall-types": "libs/etl/scryfall-types",
+    "extensions-testing": "libs/extensions/testing",
     "kenniejaydavis-blog": "apps/kenniejaydavis/blog",
-    "kenniejaydavis-blog-e2e": "apps/kenniejaydavis/blog-e2e"
+    "kenniejaydavis-blog-e2e": "apps/kenniejaydavis/blog-e2e",
+    "rxjs-operators": "libs/rxjs/operators"
   }
 }

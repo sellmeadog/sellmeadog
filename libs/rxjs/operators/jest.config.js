@@ -1,7 +1,5 @@
-const { resolve } = require('path');
-
 module.exports = {
-  displayName: 'etl-extract-scryfall',
+  displayName: 'rxjs-operators',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -13,6 +11,5 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/etl/extract-scryfall',
-  roots: ['<rootDir>', resolve('__mocks__')],
+  coverageDirectory: '../../../coverage/libs/rxjs/operators',
 };

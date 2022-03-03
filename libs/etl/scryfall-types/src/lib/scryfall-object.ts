@@ -2,7 +2,7 @@ export interface ScryfallObject {
   object: string;
 }
 
-export interface ScryfallObjectList<T extends ScryfallObject> {
+export interface ScryfallObjectList<T extends ScryfallObject = ScryfallObject> {
   object: 'list';
   has_more: boolean;
   next_page?: string;
