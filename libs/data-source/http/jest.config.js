@@ -1,7 +1,7 @@
 const { resolve } = require('path');
 
 module.exports = {
-  displayName: 'data-source-scryfall',
+  displayName: 'data-source-http',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -13,6 +13,6 @@ module.exports = {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/data-source/scryfall',
+  coverageDirectory: '../../../coverage/libs/data-source/http',
   roots: ['<rootDir>', resolve('__mocks__')],
 };

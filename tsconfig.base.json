@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@sellmeadog/data-source/http": ["libs/data-source/http/src/index.ts"],
       "@sellmeadog/data-source/scryfall": [
         "libs/data-source/scryfall/src/index.ts"
       ],

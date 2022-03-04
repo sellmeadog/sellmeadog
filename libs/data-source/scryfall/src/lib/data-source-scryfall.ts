@@ -1,34 +1,29 @@
+import { HttpDataSource } from '@sellmeadog/data-source/http';
 import {
   ScryfallBulkData,
+  ScryfallBulkDataType,
   ScryfallCard,
+  ScryfallCatalogType,
   ScryfallSet,
   ScryfallSetList,
 } from '@sellmeadog/etl/scryfall-types';
 import { parse_stream } from '@sellmeadog/rxjs/operators';
 import fetch from 'node-fetch';
-import { join } from 'path';
-import { defer, from, mergeMap, Observable, pluck, retry } from 'rxjs';
+import { from, mergeMap, Observable, pluck } from 'rxjs';
 
 export function dataSourceScryfall(): string {
   return 'data-source-scryfall';
 }
 
-export class HttpDataSource {
-  constructor(private baseUrl: string) {}
-
-  get<T>(...path: string[]): Observable<T> {
-    return defer(() => fetch(join(this.baseUrl, ...path))).pipe(
-      retry(3),
-      mergeMap((response) => response.json() as Promise<T>)
-    );
-  }
-}
-
 export class ScryfallDataSource extends HttpDataSource {
-  private readonly JSON_LINE = /({.+}),?\r?\n/;
+  private readonly JSON_LINE = /({.+}),?/;
 
   constructor() {
     super('https://api.scryfall.com');
+  }
+
+  catalog(type: ScryfallCatalogType) {
+    return this.get('catalog', type).pipe(pluck('data'));
   }
 
   default_cards() {
@@ -43,7 +38,7 @@ export class ScryfallDataSource extends HttpDataSource {
     return this.get<ScryfallSetList>('sets').pipe(pluck('data'));
   }
 
-  private bulk_data_type(type: string) {
+  private bulk_data_type(type: ScryfallBulkDataType) {
     return this.get<ScryfallBulkData>('bulk-data', type).pipe(
       mergeMap(({ download_uri }) =>
         from(fetch(download_uri)).pipe(
