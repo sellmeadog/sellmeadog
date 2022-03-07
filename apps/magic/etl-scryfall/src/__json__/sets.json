@@ -1,0 +1,44 @@
+{
+  "object": "list",
+  "has_more": false,
+  "data": [
+    {
+      "object": "set",
+      "id": "bc94aba1-7376-4e02-a12d-3a2efb66ab0f",
+      "code": "m21",
+      "mtgo_code": "m21",
+      "arena_code": "m21",
+      "tcgplayer_id": 2653,
+      "name": "Core Set 2021",
+      "uri": "https://api.scryfall.com/sets/bc94aba1-7376-4e02-a12d-3a2efb66ab0f",
+      "scryfall_uri": "https://scryfall.com/sets/m21",
+      "search_uri": "https://api.scryfall.com/cards/search?order=set&q=e%3Am21&unique=prints",
+      "released_at": "2020-07-03",
+      "set_type": "core",
+      "card_count": 397,
+      "digital": false,
+      "nonfoil_only": false,
+      "foil_only": false,
+      "block_code": "lea",
+      "block": "Core Set",
+      "icon_svg_uri": "https://c2.scryfall.com/file/scryfall-symbols/sets/m21.svg?1646024400"
+    },
+    {
+      "object": "set",
+      "id": "4887d21f-71e7-4d7a-a079-e9521fd7e6d7",
+      "code": "ss3",
+      "tcgplayer_id": 2633,
+      "name": "Signature Spellbook: Chandra",
+      "uri": "https://api.scryfall.com/sets/4887d21f-71e7-4d7a-a079-e9521fd7e6d7",
+      "scryfall_uri": "https://scryfall.com/sets/ss3",
+      "search_uri": "https://api.scryfall.com/cards/search?order=set&q=e%3Ass3&unique=prints",
+      "released_at": "2020-06-26",
+      "set_type": "spellbook",
+      "card_count": 8,
+      "digital": false,
+      "nonfoil_only": false,
+      "foil_only": false,
+      "icon_svg_uri": "https://c2.scryfall.com/file/scryfall-symbols/sets/ss3.svg?1646024400"
+    }
+  ]
+}

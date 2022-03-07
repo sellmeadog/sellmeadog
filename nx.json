@@ -41,5 +41,6 @@
         "style": "scss"
       }
     }
-  }
+  },
+  "defaultProject": "magic-etl-scryfall"
 }

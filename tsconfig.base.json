@@ -22,13 +22,17 @@
       "@sellmeadog/etl-extract-scryfall": [
         "libs/etl/extract-scryfall/src/index.ts"
       ],
-      "@sellmeadog/etl/magic-types": ["libs/etl/magic-types/src/index.ts"],
       "@sellmeadog/etl/scryfall-types": [
         "libs/etl/scryfall-types/src/index.ts"
       ],
+      "@sellmeadog/extensions/string": ["libs/extensions/string/src/index.ts"],
       "@sellmeadog/extensions/testing": [
         "libs/extensions/testing/src/index.ts"
       ],
+      "@sellmeadog/magic-transformation": [
+        "libs/magic-transformation/src/index.ts"
+      ],
+      "@sellmeadog/magic-types": ["libs/magic-types/src/index.ts"],
       "@sellmeadog/rxjs/operators": ["libs/rxjs/operators/src/index.ts"]
     }
   },

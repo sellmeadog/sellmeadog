@@ -4,11 +4,14 @@
     "data-source-http": "libs/data-source/http",
     "data-source-scryfall": "libs/data-source/scryfall",
     "etl-extract-scryfall": "libs/etl/extract-scryfall",
-    "etl-magic-types": "libs/etl/magic-types",
     "etl-scryfall-types": "libs/etl/scryfall-types",
+    "extensions-string": "libs/extensions/string",
     "extensions-testing": "libs/extensions/testing",
     "kenniejaydavis-blog": "apps/kenniejaydavis/blog",
     "kenniejaydavis-blog-e2e": "apps/kenniejaydavis/blog-e2e",
+    "magic-etl-scryfall": "apps/magic/etl-scryfall",
+    "magic-transformation": "libs/magic-transformation",
+    "magic-types": "libs/magic-types",
     "rxjs-operators": "libs/rxjs/operators"
   }
 }

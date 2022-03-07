@@ -1,0 +1,23 @@
+{
+  "root": "libs/magic-transformation",
+  "sourceRoot": "libs/magic-transformation/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/magic-transformation/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/magic-transformation"],
+      "options": {
+        "jestConfig": "libs/magic-transformation/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

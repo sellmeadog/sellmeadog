@@ -3,7 +3,10 @@ import { createReadStream } from 'fs';
 import fetch, { Response } from 'node-fetch';
 import { resolve } from 'path';
 import { lastValueFrom } from 'rxjs';
-import { ScryfallDataSource } from './data-source-scryfall';
+import {
+  make_scryfall_data_source,
+  ScryfallDataSource,
+} from './data-source-scryfall';
 
 describe('ScryfallDataSource', () => {
   let fetch_: jest.MockedFunction<typeof fetch>;
@@ -14,6 +17,10 @@ describe('ScryfallDataSource', () => {
 
     fetch_ = makeMockedFunction(fetch);
     scryfall = new ScryfallDataSource();
+  });
+
+  it('factory works', () => {
+    expect(make_scryfall_data_source()).toBeInstanceOf(ScryfallDataSource);
   });
 
   it('should GET /catalog endpoints', async () => {

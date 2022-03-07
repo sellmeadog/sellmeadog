@@ -1,0 +1,23 @@
+{
+  "root": "libs/extensions/string",
+  "sourceRoot": "libs/extensions/string/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/extensions/string/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/extensions/string"],
+      "options": {
+        "jestConfig": "libs/extensions/string/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

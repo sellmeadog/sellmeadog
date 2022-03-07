@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`main should run 1`] = `
+Array [
+  Object {
+    "_id": "bc94aba1-7376-4e02-a12d-3a2efb66ab0f",
+    "block": "Core Set",
+    "block_code": "lea",
+    "card_count": Long {
+      "high": 0,
+      "low": 397,
+      "unsigned": false,
+    },
+    "code": "m21",
+    "digital": false,
+    "icon_svg_uri": "https://c2.scryfall.com/file/scryfall-symbols/sets/m21.svg?1646024400",
+    "name": "Core Set 2021",
+    "parent_set_code": null,
+    "printed_size": Long {
+      "high": 0,
+      "low": 397,
+      "unsigned": false,
+    },
+    "released_at": "2020-07-03",
+    "set_type": "core",
+    "tcgplayer_id": Long {
+      "high": 0,
+      "low": 2653,
+      "unsigned": false,
+    },
+  },
+  Object {
+    "_id": "4887d21f-71e7-4d7a-a079-e9521fd7e6d7",
+    "block": "Non-Block Expansion",
+    "block_code": "ss3",
+    "card_count": Long {
+      "high": 0,
+      "low": 8,
+      "unsigned": false,
+    },
+    "code": "ss3",
+    "digital": false,
+    "icon_svg_uri": "https://c2.scryfall.com/file/scryfall-symbols/sets/ss3.svg?1646024400",
+    "name": "Signature Spellbook: Chandra",
+    "parent_set_code": null,
+    "printed_size": Long {
+      "high": 0,
+      "low": 8,
+      "unsigned": false,
+    },
+    "released_at": "2020-06-26",
+    "set_type": "spellbook",
+    "tcgplayer_id": Long {
+      "high": 0,
+      "low": 2633,
+      "unsigned": false,
+    },
+  },
+]
+`;

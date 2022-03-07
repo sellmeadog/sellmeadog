@@ -48,3 +48,7 @@ export class ScryfallDataSource extends HttpDataSource {
     );
   }
 }
+
+export function make_scryfall_data_source(): ScryfallDataSource {
+  return new ScryfallDataSource();
+}
